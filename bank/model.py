@@ -1,6 +1,16 @@
 # -*- coding: utf-8 -*-
 from bank import db
 
+# === 用于登陆系统 =======
+class Admin(db.Model):
+    """
+    操作银行管理系统的人员
+    """
+    __tablename__='admin'
+    adminName = db.Column(db.String(20), primary_key = True)
+    adminPasswd = db.Column(db.String(20))
+
+    
 
 # ==== entity =======
 class Branch(db.Model):
