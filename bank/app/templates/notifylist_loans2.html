@@ -13,6 +13,55 @@
 {% endblock %}
 
 {% block content %}
+
+<div class="box box-primary">
+    <form method="post">
+        {{form_search.hidden_tag()}}
+        <div class="box-header with-border">
+            {% include 'message.html' %}
+        </div>
+
+        <div class="box-body">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>支行</label>
+                    {{form_search.notify_name(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>ID</label>
+                    {{form_search.notify_name(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>次数</label>
+                    {{form_search.notify_name(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>时间</label>
+                    {{form_search.notify_name(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>金额</label>
+                    {{form_search.notify_name(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <div class="col-md-12">
+                
+                {{form_search.submit(class_="btn btn-primary pull-right")}}
+            </div>
+        </div>
+    </form>
+</div>
+
 <div class="box box-primary">
     <div class="box-header with-border">
         {% include 'message.html' %}

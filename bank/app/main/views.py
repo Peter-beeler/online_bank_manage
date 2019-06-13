@@ -11,7 +11,7 @@ logger = get_logger(__name__)
 cfg = get_config()
 
 # 通用列表查询
-def common_list(DynamicModel, view):
+def common_list(DynamicModel,form,view):
     # 接收参数
     action = request.args.get('action')
     id = request.args.get('id')
@@ -35,7 +35,7 @@ def common_list(DynamicModel, view):
 
     dict = {'content': utils.query_to_list(query), 'total_count': total_count,
             'total_page': math.ceil(total_count / length), 'page': page, 'length': length}
-    return render_template(view, form=dict, current_user=current_user)
+    return render_template(view, form=dict,form_search = form,current_user=current_user)
 
 
 # 通用单模型查询&新增&修改
@@ -84,7 +84,7 @@ def index():
 @main.route('/notifylist_bank', methods=['GET', 'POST'])
 @login_required
 def notifylist_bank():
-    return common_list(CfgNotify, 'notifylist_bank.html')
+    return common_list(CfgNotify,CfgNotifyForm(), 'notifylist_bank.html')
 
 
 # 支行管理
@@ -97,7 +97,7 @@ def notifyedit_bank():
 @main.route('/notifylist_stuff', methods=['GET', 'POST'])
 @login_required
 def notifylist_stuff():
-    return common_list(CfgNotify, 'notifylist_stuff.html')
+    return common_list(CfgNotify,CfgNotifyForm(),'notifylist_stuff.html')
 
 
 # stuff
@@ -110,7 +110,7 @@ def notifyedit_stuff():
 @main.route('/notifylist_client', methods=['GET', 'POST'])
 @login_required
 def notifylist_client():
-    return common_list(CfgNotify, 'notifylist_client.html')
+    return common_list(CfgNotify,CfgNotifyForm(), 'notifylist_client.html')
 
 @main.route('/notifyedit_client', methods=['GET', 'POST'])
 @login_required
@@ -121,7 +121,7 @@ def notifyedit_client():
 @main.route('/notifylist_account', methods=['GET', 'POST'])
 @login_required
 def notifylist_account():
-    return common_list(CfgNotify, 'notifylist_account.html')
+    return common_list(CfgNotify,CfgNotifyForm(), 'notifylist_account.html')
 
 
 @main.route('/notifyedit_account', methods=['GET', 'POST'])
@@ -133,12 +133,12 @@ def notifyedit_account():
 @main.route('/notifylist_loans', methods=['GET', 'POST'])
 @login_required
 def notifylist_loans():
-    return common_list(CfgNotify, 'notifylist_loans.html')
+    return common_list(CfgNotify,CfgNotifyForm(), 'notifylist_loans.html')
 
 @main.route('/notifylist_loans2', methods=['GET', 'POST'])
 @login_required
 def notifylist_loans2():
-    return common_list(CfgNotify, 'notifylist_loans.html')
+    return common_list(CfgNotify, CfgNotifyForm(),'notifylist_loans.html')
 
 
 @main.route('/notifyedit_loans', methods=['GET', 'POST'])
