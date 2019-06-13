@@ -18,5 +18,5 @@ db = SQLAlchemy(app)
 
 
 '''页面显示'''
-Bootstrap(app)
+# Bootstrap(app)
 from bank.controller import *
