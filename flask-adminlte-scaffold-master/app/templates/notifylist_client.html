@@ -23,28 +23,26 @@
         <table class="table table-bordered">
             <tr>
                 <th>ID</th>
-                <th>通知方式</th>
-                <th>通知人姓名</th>
-                <th>通知人号码</th>
-                <th>状态</th>
+                <th>姓名</th>
+                <th>手机号</th>
+                <th>地址</th>
+                <th>联系人姓名</th>
+                <th>联系人手机</th>
+                <th>联系人邮箱</th>
+                <th>联系人与客户关系</th>
                 <th>编辑</th>
                 <th>删除</th>
             </tr>
             {% for row in form.content %}
             <tr>
                 <td>{{row.id}}</td>
-                <td>{{row.notify_type}}</td>
-                <td>{{row.notify_name}}</td>
-                <td>{{row.notify_number}}</td>
-                <td>
-                    {% if row.status %}
-                    <input type="checkbox" data-id="{{row.id}}" class="status" data-on-text="生效" data-off-text="失效"
-                           data-size="mini" checked>
-                    {% else %}
-                    <input type="checkbox" data-id="{{row.id}}" class="status" data-on-text="生效" data-off-text="失效"
-                           data-size="mini">
-                    {% endif %}
-                </td>
+                <td>{{row.Name}}</td>
+                <td>{{row.PhoneNumber}}</td>
+                <td>{{row.Addr}}</td>
+                <td>{{row.contactName}}</td>
+                <td>{{row.contactPhone}}</td>
+                <td>{{row.contactMail}}</td>
+                <td>{{row.relation}}</td>
                 <td><a class='fa fa-lg fa-edit text-light-blue'
                        href='{{ url_for("main.notifyedit", id=row.id) }}'></a></td>
                 <td><a class='fa fa-lg fa-warning text-red' href='?action=del&id={{row.id}}'></a></td>

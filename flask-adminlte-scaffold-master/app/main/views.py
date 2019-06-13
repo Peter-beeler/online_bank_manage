@@ -135,10 +135,20 @@ def notifyedit_account():
 def notifylist_loans():
     return common_list(CfgNotify, 'notifylist_loans.html')
 
+@main.route('/notifylist_loans2', methods=['GET', 'POST'])
+@login_required
+def notifylist_loans2():
+    return common_list(CfgNotify, 'notifylist_loans.html')
+
 
 @main.route('/notifyedit_loans', methods=['GET', 'POST'])
 @login_required
 def notifyedit_loans():
     return common_edit(CfgNotify, CfgNotifyForm(), 'notifyedit_loans.html')
+
+@main.route('/notifyedit_loans2', methods=['GET', 'POST'])
+@login_required
+def notifyedit_loans2():
+    return common_edit(CfgNotify, CfgNotifyForm(), 'notifyedit_loans2.html')
 
 

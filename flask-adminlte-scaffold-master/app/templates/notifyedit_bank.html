@@ -24,35 +24,28 @@
         </div>
 
         <div class="box-body">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label>{{form.check_order.label}}</label>
-                    {{form.check_order(class_="slider form-control",placeholder="请输入 列表顺序")}}
-                </div>
-            </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>{{form.notify_type.label}}</label>
-                    {{form.notify_type(class_="form-control select2",placeholder="请输入")}}
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>{{form.notify_name.label}}</label>
+                    <label>支行名称</label>
                     {{form.notify_name(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>{{form.notify_number.label}}</label>
-                    {{form.notify_number(class_="form-control",placeholder="请输入")}}
+                    <label>城市</label>
+                    {{form.notify_name(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>资产</label>
+                    {{form.notify_name(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
         </div>
-
         <div class="box-footer">
             <div class="col-md-12">
-                {{form.status()}}
+                
                 {{form.submit(class_="btn btn-primary pull-right")}}
             </div>
         </div>

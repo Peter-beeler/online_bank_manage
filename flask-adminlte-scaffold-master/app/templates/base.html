@@ -131,8 +131,12 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url_for('main.notifyedit_loans') }}"><i class="fa fa-circle-o"></i> 查询</a></li>
-                        <li><a href="{{ url_for('main.notifylist_loans') }}"><i class="fa fa-circle-o"></i> 编辑</a></li>
+                        <li><a href="{{ url_for('main.notifyedit_loans') }}"><i class="fa fa-circle-o"></i> 贷款编辑</a></li>
+                        <li><a href="{{ url_for('main.notifylist_loans') }}"><i class="fa fa-circle-o"></i> 贷款查询</a></li>
+                    </ul>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url_for('main.notifyedit_loans2') }}"><i class="fa fa-circle-o"></i> 单次贷款支付编辑</a></li>
+                        <li><a href="{{ url_for('main.notifylist_loans2') }}"><i class="fa fa-circle-o"></i> 单次贷款支付查询</a></li>
                     </ul>
                 </li>
             </ul>

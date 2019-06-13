@@ -363,3 +363,182 @@
 2019-06-13 09:30:59,555 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 09:30:59] "[37mGET /notifyedit_account HTTP/1.1[0m" 200 -
 2019-06-13 09:31:34,763 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
 2019-06-13 09:31:34,776 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 09:31:34] "[37mGET /notifyedit_stuff HTTP/1.1[0m" 200 -
+2019-06-13 09:37:32,694 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 09:37:32,697 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 09:37:32,698 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 09:37:32,710 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 09:37:32] "[37mGET /notifylist_stuff HTTP/1.1[0m" 200 -
+2019-06-13 09:37:35,168 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 09:37:35,173 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 09:37:35] "[37mGET /notifyedit_stuff HTTP/1.1[0m" 200 -
+2019-06-13 09:37:37,353 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 09:37:37,355 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 09:37:37,356 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 09:37:37,360 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 09:37:37] "[37mGET /notifylist_stuff HTTP/1.1[0m" 200 -
+2019-06-13 09:40:37,678 werkzeug     INFO      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2019-06-13 09:40:37,679 werkzeug     INFO      * Restarting with stat
+2019-06-13 09:40:37,923 werkzeug     WARNING   * Debugger is active!
+2019-06-13 09:40:37,933 werkzeug     INFO      * Debugger PIN: 162-656-185
+2019-06-13 09:40:47,032 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 09:40:47,036 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 09:40:47,037 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 09:40:47,066 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 09:40:47] "[37mGET /notifylist_bank HTTP/1.1[0m" 200 -
+2019-06-13 09:40:51,659 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 09:40:51,671 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 09:40:51] "[37mGET /notifyedit_bank HTTP/1.1[0m" 200 -
+2019-06-13 09:51:12,391 werkzeug     INFO      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2019-06-13 09:51:12,392 werkzeug     INFO      * Restarting with stat
+2019-06-13 09:51:12,650 werkzeug     WARNING   * Debugger is active!
+2019-06-13 09:51:12,661 werkzeug     INFO      * Debugger PIN: 162-656-185
+2019-06-13 09:51:19,035 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 09:51:19,039 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 09:51:19,040 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 09:51:19,071 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 09:51:19] "[37mGET /notifylist_account HTTP/1.1[0m" 200 -
+2019-06-13 10:04:23,553 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:04:23,565 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:04:23] "[37mGET /notifyedit_bank HTTP/1.1[0m" 200 -
+2019-06-13 10:06:01,736 werkzeug     INFO      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2019-06-13 10:06:01,737 werkzeug     INFO      * Restarting with stat
+2019-06-13 10:06:01,991 werkzeug     WARNING   * Debugger is active!
+2019-06-13 10:06:02,001 werkzeug     INFO      * Debugger PIN: 162-656-185
+2019-06-13 10:06:04,958 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:06:04,990 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:06:04] "[37mGET /notifyedit_bank HTTP/1.1[0m" 200 -
+2019-06-13 10:06:46,689 werkzeug     INFO      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2019-06-13 10:06:46,689 werkzeug     INFO      * Restarting with stat
+2019-06-13 10:06:46,949 werkzeug     WARNING   * Debugger is active!
+2019-06-13 10:06:46,959 werkzeug     INFO      * Debugger PIN: 162-656-185
+2019-06-13 10:06:49,298 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:06:49,302 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 10:06:49,304 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 10:06:49,334 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:06:49] "[37mGET /notifylist_bank HTTP/1.1[0m" 200 -
+2019-06-13 10:06:50,586 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:06:50,597 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:06:50] "[37mGET /notifyedit_bank HTTP/1.1[0m" 200 -
+2019-06-13 10:07:05,643 werkzeug     INFO      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2019-06-13 10:07:05,644 werkzeug     INFO      * Restarting with stat
+2019-06-13 10:07:05,913 werkzeug     WARNING   * Debugger is active!
+2019-06-13 10:07:05,922 werkzeug     INFO      * Debugger PIN: 162-656-185
+2019-06-13 10:07:08,601 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:07:08,650 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:07:08] "[37mGET /notifyedit_bank HTTP/1.1[0m" 200 -
+2019-06-13 10:08:14,448 werkzeug     INFO      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2019-06-13 10:08:14,448 werkzeug     INFO      * Restarting with stat
+2019-06-13 10:08:14,706 werkzeug     WARNING   * Debugger is active!
+2019-06-13 10:08:14,716 werkzeug     INFO      * Debugger PIN: 162-656-185
+2019-06-13 10:08:17,609 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:08:17,642 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:08:17] "[37mGET /notifyedit_bank HTTP/1.1[0m" 200 -
+2019-06-13 10:08:38,053 werkzeug     INFO      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2019-06-13 10:08:38,054 werkzeug     INFO      * Restarting with stat
+2019-06-13 10:08:38,312 werkzeug     WARNING   * Debugger is active!
+2019-06-13 10:08:38,321 werkzeug     INFO      * Debugger PIN: 162-656-185
+2019-06-13 10:08:39,928 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:08:39,958 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:08:39] "[37mGET /notifyedit_bank HTTP/1.1[0m" 200 -
+2019-06-13 10:19:29,475 werkzeug     INFO      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2019-06-13 10:19:29,475 werkzeug     INFO      * Restarting with stat
+2019-06-13 10:19:29,729 werkzeug     WARNING   * Debugger is active!
+2019-06-13 10:19:29,738 werkzeug     INFO      * Debugger PIN: 162-656-185
+2019-06-13 10:19:35,623 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:19:35,655 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:19:35] "[37mGET /notifyedit_bank HTTP/1.1[0m" 200 -
+2019-06-13 10:19:56,257 werkzeug     INFO      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2019-06-13 10:19:56,258 werkzeug     INFO      * Restarting with stat
+2019-06-13 10:19:56,511 werkzeug     WARNING   * Debugger is active!
+2019-06-13 10:19:56,521 werkzeug     INFO      * Debugger PIN: 162-656-185
+2019-06-13 10:19:57,925 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:19:57,972 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:19:57] "[1m[35mGET /notifyedit_bank HTTP/1.1[0m" 500 -
+2019-06-13 10:19:57,990 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:19:57] "[37mGET /notifyedit_bank?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 200 -
+2019-06-13 10:19:57,990 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:19:57] "[37mGET /notifyedit_bank?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1[0m" 200 -
+2019-06-13 10:19:57,991 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:19:57] "[37mGET /notifyedit_bank?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 200 -
+2019-06-13 10:19:58,017 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:19:58] "[37mGET /notifyedit_bank?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+2019-06-13 10:19:58,053 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:19:58] "[37mGET /notifyedit_bank?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1[0m" 200 -
+2019-06-13 10:19:58,064 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:19:58] "[37mGET /notifyedit_bank?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+2019-06-13 10:21:18,693 werkzeug     INFO      * Detected change in '/Users/peter/Desktop/2019spring/online_bank_manage/flask-adminlte-scaffold-master/app/main/views.py', reloading
+2019-06-13 10:21:18,730 werkzeug     INFO      * Restarting with stat
+2019-06-13 10:22:01,021 werkzeug     INFO      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2019-06-13 10:22:01,032 werkzeug     INFO      * Restarting with stat
+2019-06-13 10:22:01,362 werkzeug     WARNING   * Debugger is active!
+2019-06-13 10:22:01,373 werkzeug     INFO      * Debugger PIN: 162-656-185
+2019-06-13 10:22:03,057 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:03,088 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:03] "[37mGET /notifyedit_bank HTTP/1.1[0m" 200 -
+2019-06-13 10:22:06,811 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:06,814 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 10:22:06,815 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 10:22:06,824 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:06] "[37mGET /notifylist_bank HTTP/1.1[0m" 200 -
+2019-06-13 10:22:09,541 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:09,556 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:09] "[37mGET /notifyedit_stuff HTTP/1.1[0m" 200 -
+2019-06-13 10:22:11,676 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:11,679 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 10:22:11,680 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 10:22:11,690 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:11] "[37mGET /notifylist_stuff HTTP/1.1[0m" 200 -
+2019-06-13 10:22:13,775 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:13,791 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:13] "[37mGET /notifyedit_client HTTP/1.1[0m" 200 -
+2019-06-13 10:22:15,170 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:15,171 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 10:22:15,173 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 10:22:15,183 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:15] "[37mGET /notifylist_client HTTP/1.1[0m" 200 -
+2019-06-13 10:22:15,225 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:15,233 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:15] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2019-06-13 10:22:16,976 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:16,982 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:16] "[37mGET /notifyedit_client HTTP/1.1[0m" 200 -
+2019-06-13 10:22:24,524 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:24,528 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 10:22:24,529 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 10:22:24,534 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:24] "[37mGET /notifylist_client HTTP/1.1[0m" 200 -
+2019-06-13 10:22:26,319 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:26,322 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 10:22:26,323 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 10:22:26,340 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:26] "[37mGET /notifylist_account HTTP/1.1[0m" 200 -
+2019-06-13 10:22:27,368 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:27,381 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:27] "[37mGET /notifyedit_account HTTP/1.1[0m" 200 -
+2019-06-13 10:22:29,333 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:29,344 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:29] "[37mGET /notifyedit_loans HTTP/1.1[0m" 200 -
+2019-06-13 10:22:30,143 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:30,145 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 10:22:30,146 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 10:22:30,156 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:30] "[37mGET /notifylist_loans HTTP/1.1[0m" 200 -
+2019-06-13 10:22:31,216 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:31,226 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:31] "[37mGET /notifyedit_loans2 HTTP/1.1[0m" 200 -
+2019-06-13 10:22:31,269 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:31,274 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:31] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2019-06-13 10:22:31,909 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:31,912 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 10:22:31,913 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 10:22:31,916 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:31] "[37mGET /notifylist_loans2 HTTP/1.1[0m" 200 -
+2019-06-13 10:22:31,954 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:22:31,961 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:22:31] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2019-06-13 10:24:40,716 werkzeug     INFO      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2019-06-13 10:24:40,716 werkzeug     INFO      * Restarting with stat
+2019-06-13 10:24:40,973 werkzeug     WARNING   * Debugger is active!
+2019-06-13 10:24:40,984 werkzeug     INFO      * Debugger PIN: 162-656-185
+2019-06-13 10:24:44,077 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:24:44,080 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 10:24:44,080 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 10:24:44,113 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:24:44] "[37mGET /notifylist_loans2 HTTP/1.1[0m" 200 -
+2019-06-13 10:24:45,579 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:24:45,587 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:24:45] "[37mGET /index HTTP/1.1[0m" 200 -
+2019-06-13 10:24:45,625 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:24:45,634 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:24:45] "[33mGET /api/stats/summary HTTP/1.1[0m" 404 -
+2019-06-13 10:24:45,635 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:24:45] "[36mGET /static/plugins/ionicons/fonts/ionicons.ttf?v=2.0.0 HTTP/1.1[0m" 304 -
+2019-06-13 10:24:48,007 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:24:48,018 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:24:48] "[37mGET /notifyedit_bank HTTP/1.1[0m" 200 -
+2019-06-13 10:24:49,635 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:24:49,638 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 10:24:49,639 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 10:24:49,649 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:24:49] "[37mGET /notifylist_bank HTTP/1.1[0m" 200 -
+2019-06-13 10:24:52,517 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:24:52,528 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:24:52] "[37mGET /notifyedit_stuff HTTP/1.1[0m" 200 -
+2019-06-13 10:24:55,389 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:24:55,391 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 10:24:55,392 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 10:24:55,402 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:24:55] "[37mGET /notifylist_stuff HTTP/1.1[0m" 200 -
+2019-06-13 10:24:58,467 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:24:58,486 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:24:58] "[37mGET /notifyedit_client HTTP/1.1[0m" 200 -
+2019-06-13 10:24:59,691 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:24:59,694 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 10:24:59,695 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 10:24:59,704 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:24:59] "[37mGET /notifylist_client HTTP/1.1[0m" 200 -
+2019-06-13 10:25:01,503 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:25:01,505 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 10:25:01,506 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 10:25:01,517 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:25:01] "[37mGET /notifylist_account HTTP/1.1[0m" 200 -
+2019-06-13 10:25:02,686 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:25:02,699 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:25:02] "[37mGET /notifyedit_account HTTP/1.1[0m" 200 -
+2019-06-13 10:26:54,213 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:26:54,222 peewee       DEBUG    ('SELECT COUNT(1) FROM (SELECT 1 FROM `cfgnotify` AS `t1`) AS `_wrapped`', [])
+2019-06-13 10:26:54,223 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`check_order`, `t1`.`notify_type`, `t1`.`notify_name`, `t1`.`notify_number`, `t1`.`status` FROM `cfgnotify` AS `t1` LIMIT %s OFFSET %s', [10, 0])
+2019-06-13 10:26:54,228 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:26:54] "[37mGET /notifylist_account HTTP/1.1[0m" 200 -
+2019-06-13 10:26:54,870 peewee       DEBUG    ('SELECT `t1`.`id`, `t1`.`username`, `t1`.`password`, `t1`.`fullname`, `t1`.`email`, `t1`.`phone`, `t1`.`status` FROM `user` AS `t1` WHERE (`t1`.`id` = %s) LIMIT %s OFFSET %s', [1, 1, 0])
+2019-06-13 10:26:54,876 werkzeug     INFO     127.0.0.1 - - [13/Jun/2019 10:26:54] "[37mGET /notifyedit_account HTTP/1.1[0m" 200 -

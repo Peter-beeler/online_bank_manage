@@ -23,28 +23,28 @@
         <table class="table table-bordered">
             <tr>
                 <th>ID</th>
-                <th>通知方式</th>
-                <th>通知人姓名</th>
-                <th>通知人号码</th>
-                <th>状态</th>
+                <th>账户类型</th>
+                <th>所属支行</th>
+                <th>余额</th>
+                <th>开户时间</th>
+                <th>最近访问时间</th>
+                <th>信用额度</th>
+                <th>利率</th>
+                <th>货币类型</th>
                 <th>编辑</th>
                 <th>删除</th>
             </tr>
             {% for row in form.content %}
             <tr>
                 <td>{{row.id}}</td>
-                <td>{{row.notify_type}}</td>
-                <td>{{row.notify_name}}</td>
-                <td>{{row.notify_number}}</td>
-                <td>
-                    {% if row.status %}
-                    <input type="checkbox" data-id="{{row.id}}" class="status" data-on-text="生效" data-off-text="失效"
-                           data-size="mini" checked>
-                    {% else %}
-                    <input type="checkbox" data-id="{{row.id}}" class="status" data-on-text="生效" data-off-text="失效"
-                           data-size="mini">
-                    {% endif %}
-                </td>
+                <td>{{row.accountType}}</td>
+                <td>{{row.branchName}}</td>
+                <td>{{row.balance}}</td>
+                <td>{{row.openTime}}</td>
+                <td>{{row.visitTime}}</td>
+                <td>{{row.creditLimit}}</td>
+                <td>{{row.interestRate}}</td>
+                <td>{{row.currencyType}}</td>
                 <td><a class='fa fa-lg fa-edit text-light-blue'
                        href='{{ url_for("main.notifyedit", id=row.id) }}'></a></td>
                 <td><a class='fa fa-lg fa-warning text-red' href='?action=del&id={{row.id}}'></a></td>
