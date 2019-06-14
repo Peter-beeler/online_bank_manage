@@ -3,8 +3,9 @@ import math
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from app import utils
-from app.models import CfgNotify,Branch
-from app.main.forms import CfgNotifyForm,Bank
+from app.utils import flash_errors,form_to_model,model_to_form,query_to_list
+from app.models import *
+from app.main.forms import *
 from . import main
 from playhouse.shortcuts import dict_to_model, model_to_dict
 
@@ -34,7 +35,7 @@ def common_list(DynamicModel,form,view):
     # 处理分页
     if page: query = query.paginate(page, length)
 
-    dict = {'content': utils.query_to_list(query), 'total_count': total_count,
+    dict = {'content': query_to_list(query), 'total_count': total_count,
             'total_page': math.ceil(total_count / length), 'page': page, 'length': length}
     return render_template(view, form=dict,form_search = form,current_user=current_user)
 
@@ -46,12 +47,12 @@ def common_edit(DynamicModel, form, view):
         # 查询
         model = DynamicModel.get(DynamicModel.id == id)
         if request.method == 'GET':
-            utils.model_to_form(model, form)
+            model_to_form(model, form)
         # 修改
         if request.method == 'POST':
             if form.validate_on_submit():
                 print(form.bankName)
-                utils.form_to_model(form, model)
+                form_to_model(form, model)
                 model.save(force_insert = True)
                 flash('修改成功')
             else:
@@ -60,12 +61,13 @@ def common_edit(DynamicModel, form, view):
         # 新增
         if form.validate_on_submit():
             model = DynamicModel()
-            utils.form_to_model(form, model)
+            form_to_model(form, model)
+            print(model.branchName)
             dct = model_to_dict(model)
             DynamicModel.insert(dct).execute()
             flash('保存成功')
         else:
-            utils.flash_errors(form)
+            flash_errors(form)
     return render_template(view, form=form, current_user=current_user)
 
 
@@ -107,7 +109,7 @@ def notifylist_stuff():
 @main.route('/notifyedit_stuff', methods=['GET', 'POST'])
 @login_required
 def notifyedit_stuff():
-    return common_edit(CfgNotify, CfgNotifyForm(), 'notifyedit_stuff.html')
+    return common_edit(Staff,staff(), 'notifyedit_stuff.html')
 
 # client
 @main.route('/notifylist_client', methods=['GET', 'POST'])
@@ -118,7 +120,7 @@ def notifylist_client():
 @main.route('/notifyedit_client', methods=['GET', 'POST'])
 @login_required
 def notifyedit_client():
-    return common_edit(CfgNotify, CfgNotifyForm(), 'notifyedit_client.html')
+    return common_edit(Client, client(), 'notifyedit_client.html')
 
 # account
 @main.route('/notifylist_account', methods=['GET', 'POST'])
@@ -141,17 +143,17 @@ def notifylist_loans():
 @main.route('/notifylist_loans2', methods=['GET', 'POST'])
 @login_required
 def notifylist_loans2():
-    return common_list(CfgNotify, CfgNotifyForm(),'notifylist_loans.html')
+    return common_list(CfgNotify, CfgNotifyForm(),'notifylist_loans2.html')
 
 
 @main.route('/notifyedit_loans', methods=['GET', 'POST'])
 @login_required
 def notifyedit_loans():
-    return common_edit(CfgNotify, CfgNotifyForm(), 'notifyedit_loans.html')
+    return common_edit(Loan, loans(), 'notifyedit_loans.html')
 
 @main.route('/notifyedit_loans2', methods=['GET', 'POST'])
 @login_required
 def notifyedit_loans2():
-    return common_edit(CfgNotify, CfgNotifyForm(), 'notifyedit_loans2.html')
+    return common_edit(Grant1, grant(), 'notifyedit_loans2.html')
 
 

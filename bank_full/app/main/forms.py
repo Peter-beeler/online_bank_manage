@@ -24,13 +24,13 @@ class account(FlaskForm):
 	balance = FloatField('余额', validators=[Length(0, 20, message='长度不正确')])
 	openTime  = DateTimeField('开户时间')
 	visitTime = DateTimeField('访问时间')
-	creditLimit = FloatField('额度', validators=[Length(0, 20, message='长度不正确')])
-	interestrate = FloatField('利率', validators=[Length(0, 20, message='长度不正确')])
+	creditLimit = FloatField('额度')
+	interestrate = FloatField('利率')
 	currencyType = StringField('货币类型', validators=[Length(0, 20, message='长度不正确')])
 	submit = SubmitField('提交')
 
 class client(FlaskForm):
-	ID = StringField('ID', validators=[Length(0,20,message='长度不正确')])
+	id = StringField('ID', validators=[Length(0,20,message='长度不正确')])
 	clientName = StringField('姓名', validators=[Length(0,20,message='长度不正确')])
 	clientPhone = StringField('电话', validators=[Length(0,20,message='长度不正确')])
 	clientAddr = StringField('地址', validators=[Length(0,40,message='长度不正确')])
@@ -43,20 +43,28 @@ class client(FlaskForm):
 class loans(FlaskForm):
 	branchName = StringField('支行', validators=[Length(0,20,message='长度不正确')])
 	loanId = StringField('ID', validators=[Length(0,6,message='长度不正确')])
-	loanAmount = FloatField('数额', validators=[Length(0, 20, message='长度不正确')])
-	payNum = IntegerField('逐次支付', validators=[Length(0,20,message='长度不正确')])
+	loanAmount = FloatField('数额')
+	payNum = IntegerField('逐次支付')
 	submit = SubmitField('提交')
 
 
 class grant(FlaskForm):
 	branchName = StringField('支行', validators=[Length(0,20,message='长度不正确')])
 	loanId = StringField('支行', validators=[Length(0,6,message='长度不正确')])
-	grantCount = IntegerField('次数', validators=[Length(0,20,message='长度不正确')])
-	grantTime = DateTimeField('支付时间')
-	grantMoney = FloatField('金额', validators=[Length(0, 20, message='长度不正确')])
+	grantCount = IntegerField('次数')
+	grantTime = DateField('支付时间')
+	grantMoney = FloatField('金额')
 	submit = SubmitField('提交')
 
-
+class staff(FlaskForm):
+	id = StringField('ID', validators=[Length(0,20,message='长度不正确')])
+	branchName = StringField('支行', validators=[Length(0,20,message='长度不正确')])
+	deptId = IntegerField('部门')
+	staffName = StringField('姓名', validators=[Length(0,20,message='长度不正确')])
+	staffPhone = StringField('电话', validators=[Length(0,20,message='长度不正确')])
+	staffAddr = StringField('地址', validators=[Length(0,20,message='长度不正确')])
+	startDate = DateField('支付时间')
+	submit = SubmitField('提交')
 
 
 

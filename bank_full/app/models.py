@@ -160,7 +160,7 @@ class Loan(BaseModel):
         tablename = 'loan'
         primary_key = CompositeKey('branchName', 'loanId')
 
-class Grant(BaseModel):
+class Grant1(BaseModel):
     """
     单次付款类
     """
