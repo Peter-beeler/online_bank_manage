@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from peewee import MySQLDatabase, Model, CharField, BooleanField, IntegerField, \
-    UUIDField, ForeignKeyField,FloatField,DateField,DateTimeField, CompositeKey
+    CharField, ForeignKeyField,FloatField,DateField,DateTimeField, CompositeKey
 import json
 from werkzeug.security import check_password_hash
 from flask_login import UserMixin
@@ -73,9 +73,9 @@ class Department(BaseModel):
 
     branchName = ForeignKeyField(Branch)
     deptId = IntegerField()
-    deptName = UUIDField()
-    deptType = UUIDField()
-    deptManagerID = UUIDField()
+    deptName = CharField()
+    deptType = CharField()
+    deptManagerID = CharField()
 
     class Meta:
         tablename = 'department'
@@ -86,11 +86,11 @@ class ChequeAccount(BaseModel):
     支票账户类
     """
 
-    id = UUIDField(primary_key=True)
+    id = CharField(primary_key=True)
     branchName = ForeignKeyField(Branch)
     accountBalance = FloatField()
-    openTime = DateTimeField()
-    visitTime = DateTimeField()
+    openTime = DateField()
+    visitTime = DateField()
     creditLimit = FloatField()
 
     class Meta:
@@ -100,13 +100,13 @@ class DepositAccount(BaseModel):
     """
     储蓄账户类
     """
-    id = UUIDField(primary_key=True)
+    id = CharField(primary_key=True)
     branchName = ForeignKeyField(Branch)
     accountBalance = FloatField()
-    openTime = DateTimeField()
-    visitTime = DateTimeField()
+    openTime = DateField()
+    visitTime = DateField()
     interestRate = FloatField()
-    currencyType = UUIDField()
+    currencyType = CharField()
 
 
     class Meta:
@@ -117,12 +117,12 @@ class Staff(BaseModel):
     员工类
     """
 
-    id = UUIDField(primary_key=True)
-    branchName = UUIDField()
+    id = CharField(primary_key=True)
+    branchName = CharField()
     deptId = IntegerField()
-    staffName = UUIDField()
-    staffPhone = UUIDField()
-    staffAddr = UUIDField()
+    staffName = CharField()
+    staffPhone = CharField()
+    staffAddr = CharField()
     startDate = DateField()
 
     class Meta:
@@ -133,14 +133,14 @@ class Client(BaseModel):
     客户类
     """
 
-    id = UUIDField(primary_key=True)
-    clientName = UUIDField()
-    clientPhone = UUIDField()
-    clientAddr = UUIDField()
-    contactName = UUIDField()
-    contactPhone = UUIDField()
-    contactEmail = UUIDField()
-    contactRelation = UUIDField()
+    id = CharField(primary_key=True)
+    clientName = CharField()
+    clientPhone = CharField()
+    clientAddr = CharField()
+    contactName = CharField()
+    contactPhone = CharField()
+    contactEmail = CharField()
+    contactRelation = CharField()
 
     class Meta:
         tablename = 'client'
@@ -151,7 +151,7 @@ class Loan(BaseModel):
     """
 
     branchName = ForeignKeyField(Branch)
-    loanId = UUIDField()
+    loanId = CharField()
     loanAmount = FloatField()
     payNum = IntegerField()
 
@@ -165,8 +165,8 @@ class Grant1(BaseModel):
     单次付款类
     """
 
-    branchName = UUIDField()
-    loanId = UUIDField()
+    branchName = CharField()
+    loanId = CharField()
     grantCount = IntegerField()
     grantTime = DateField()
     grantMoney = FloatField()
@@ -222,8 +222,8 @@ class OpenAccount(BaseModel):
 
     branchName = ForeignKeyField(Branch)
     id = ForeignKeyField(Client)
-    depositAccountId = UUIDField()
-    chequeAccountId = UUIDField()
+    depositAccountId = CharField()
+    chequeAccountId = CharField()
 
     class Meta:
         tablename = 'openaccount'
@@ -234,8 +234,8 @@ class OwnLoan(BaseModel):
     拥有。客户拥有贷款的关系
     """
 
-    branchName = UUIDField()
-    loanId = UUIDField()
+    branchName = CharField()
+    loanId = CharField()
     clientId = ForeignKeyField(Client)
 
     class Meta:
@@ -249,7 +249,7 @@ class Serve(BaseModel):
 
     clientId = ForeignKeyField(Client)
     staffId = ForeignKeyField(Staff)
-    ServiceType = UUIDField()
+    ServiceType = CharField()
 
     class Meta:
         tablename = 'serve'

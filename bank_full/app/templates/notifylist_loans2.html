@@ -25,31 +25,31 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>支行</label>
-                    {{form_search.notify_name(class_="form-control",placeholder="请输入")}}
+                    {{form_search.branchName(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label>ID</label>
-                    {{form_search.notify_name(class_="form-control",placeholder="请输入")}}
+                    {{form_search.loanId(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label>次数</label>
-                    {{form_search.notify_name(class_="form-control",placeholder="请输入")}}
+                    {{form_search.grantCount(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label>时间</label>
-                    {{form_search.notify_name(class_="form-control",placeholder="请输入")}}
+                    {{form_search.grantTime(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label>金额</label>
-                    {{form_search.notify_name(class_="form-control",placeholder="请输入")}}
+                    {{form_search.grantMoney(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
         </div>
@@ -82,34 +82,19 @@
             {% for row in form.content %}
             <tr>
                 <td>{{row.branchName}}</td>
-                <td>{{row.loadID}}</td>
-                <td>{{row.count}}</td>
-                <td>{{row.time}}</td>
-                <td>{{row.money}}</td>
+                <td>{{row.loanId}}</td>
+                <td>{{row.grantCount}}</td>
+                <td>{{row.grantTime}}</td>
+                <td>{{row.grantMoney}}</td>
                 <td><a class='fa fa-lg fa-edit text-light-blue'
-                       href='{{ url_for("main.notifyedit", id=row.id) }}'></a></td>
-                <td><a class='fa fa-lg fa-warning text-red' href='?action=del&id={{row.id}}'></a></td>
+                       href='{{ url_for("main.notifyedit_loans2", id=row.id) }}'></a></td>
+                <td><a class='fa fa-lg fa-warning text-red' href='?action=del&id={{row.loanId}}'></a></td>
             </tr>
             {% endfor %}
         </table>
         {% endif %}
     </div>
 
-    <div class="box-footer clearfix">
-        {% if form%}
-        <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">&laquo;</a></li>
-            {% for i in range(1, form.total_page+ 1) %}
-            {% if i == form.page %}
-            <li><a href="?page={{i}}"><b>{{i}}</b></a></li>
-            {% else %}
-            <li><a href="?page={{i}}">{{i}}</a></li>
-            {% endif %}
-            {% endfor %}
-            <li><a href="#">&raquo;</a></li>
-        </ul>
-        {% endif %}
-    </div>
 </div>
 {% endblock %}
 

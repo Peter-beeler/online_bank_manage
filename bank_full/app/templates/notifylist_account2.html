@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 
-{% block title %}通知方式查询{% endblock %}
+{% block title %}账户查询{% endblock %}
 {% block navbar %}
 <section class="content-header">
-    <h1>贷款查询</h1>
+    <h1>账户查询</h1>
     <ol class="breadcrumb">
         <li><i class="fa fa-dashboard"></i> 当前位置</li>
-        <li class="active">贷款管理</li>
-        <li class="active">贷款查询</li>
+        <li class="active">账户管理</li>
+        <li class="active">账户查询</li>
     </ol>
 </section>
 {% endblock %}
 
-{% block content %}
 
+{% block content %}
 <div class="box box-primary">
     <form method="post">
         {{form_search.hidden_tag()}}
@@ -24,26 +24,44 @@
         <div class="box-body">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>支行</label>
+                    <label>ID</label>
+                    {{form_search.id(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>所属支行</label>
                     {{form_search.branchName(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>ID</label>
-                    {{form_search.loanId(class_="form-control",placeholder="请输入")}}
+                    <label>余额</label>
+                    {{form_search.accountBalance(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>总数额</label>
-                    {{form_search.loanAmount(class_="form-control",placeholder="请输入")}}
+                    <label>开户时间</label>
+                    {{form_search.openTime(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>已支付</label>
-                    {{form_search.payNum(class_="form-control",placeholder="请输入")}}
+                    <label>最近访问时间</label>
+                    {{form_search.visitTime(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>利率</label>
+                    {{form_search.interestRate(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>货币类型</label>
+                    {{form_search.currencyType(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
         </div>
@@ -65,29 +83,33 @@
         {% if form%}
         <table class="table table-bordered">
             <tr>
-                <th>支行</th>
                 <th>ID</th>
-                <th>贷款数额</th>
-                <th>已支付</th>
+                <th>所属支行</th>
+                <th>余额</th>
+                <th>开户时间</th>
+                <th>最近访问时间</th>
+                <th>利率</th>
+                <th>货币类型</th>
                 <th>编辑</th>
                 <th>删除</th>
             </tr>
             {% for row in form.content %}
             <tr>
+                <td>{{row.id}}</td>
                 <td>{{row.branchName}}</td>
-                <td>{{row.loanId}}</td>
-                <td>{{row.loanAmount}}</td>
-                <td>{{row.payNum}}</td>
+                <td>{{row.accountBalance}}</td>
+                <td>{{row.openTime}}</td>
+                <td>{{row.visitTime}}</td>
+                <td>{{row.interestRate}}</td>
+                <td>{{row.currencyType}}</td>
                 <td><a class='fa fa-lg fa-edit text-light-blue'
-                       href='{{ url_for("main.notifyedit_loans", id=row.id) }}'></a></td>
-                <td><a class='fa fa-lg fa-warning text-red' href='?action=del&id={{row.loanId}}'></a></td>
+                       href='{{ url_for("main.notifyedit_account2", id=row.id) }}'></a></td>
+                <td><a class='fa fa-lg fa-warning text-red' href='?action=del&id={{row.id}}'></a></td>
             </tr>
             {% endfor %}
         </table>
         {% endif %}
     </div>
-
-   
 </div>
 {% endblock %}
 

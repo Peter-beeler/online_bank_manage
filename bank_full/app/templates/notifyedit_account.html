@@ -18,7 +18,7 @@
 {% block content %}
 <div class="box box-primary">
     <form method="post">
-        {{form.hidden_tag()}}
+        {{form_search.hidden_tag()}}
         <div class="box-header with-border">
             {% include 'message.html' %}
         </div>
@@ -27,62 +27,44 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>ID</label>
-                    {{form.notify_name(class_="form-control",placeholder="请输入")}}
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>账户类型</label>
-                    {{form.notify_name(class_="form-control",placeholder="请输入")}}
+                    {{form_search.id(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label>所属支行</label>
-                    {{form.notify_name(class_="form-control",placeholder="请输入")}}
+                    {{form_search.branchName(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label>余额</label>
-                    {{form.notify_name(class_="form-control",placeholder="请输入")}}
+                    {{form_search.accountBalance(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label>开户时间</label>
-                    {{form.notify_name(class_="form-control",placeholder="请输入")}}
+                    {{form_search.openTime(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label>最近访问时间</label>
-                    {{form.notify_name(class_="form-control",placeholder="请输入")}}
+                    {{form_search.visitTime(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label>信用额度</label>
-                    {{form.notify_name(class_="form-control",placeholder="请输入")}}
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>利率</label>
-                    {{form.notify_name(class_="form-control",placeholder="请输入")}}
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>货币类型</label>
-                    {{form.notify_name(class_="form-control",placeholder="请输入")}}
+                    {{form_search.creditLimit(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
         </div>
         <div class="box-footer">
             <div class="col-md-12">
                 
-                {{form.submit(class_="btn btn-primary pull-right")}}
+                {{form_search.submit(class_="btn btn-primary pull-right")}}
             </div>
         </div>
     </form>
