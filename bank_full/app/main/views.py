@@ -3,8 +3,8 @@ import math
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from app import utils
-from app.models import CfgNotify
-from app.main.forms import CfgNotifyForm
+from app.models import CfgNotify,Branch
+from app.main.forms import CfgNotifyForm,Bank
 from . import main
 
 logger = get_logger(__name__)
@@ -49,6 +49,7 @@ def common_edit(DynamicModel, form, view):
         # 修改
         if request.method == 'POST':
             if form.validate_on_submit():
+                print(form.bankName)
                 utils.form_to_model(form, model)
                 model.save()
                 flash('修改成功')
@@ -59,6 +60,7 @@ def common_edit(DynamicModel, form, view):
         if form.validate_on_submit():
             model = DynamicModel()
             utils.form_to_model(form, model)
+            print(form.bankName)
             model.save()
             flash('保存成功')
         else:
@@ -91,7 +93,7 @@ def notifylist_bank():
 @main.route('/notifyedit_bank', methods=['GET', 'POST'])
 @login_required
 def notifyedit_bank():
-    return common_edit(CfgNotify, CfgNotifyForm(), 'notifyedit_bank.html')
+    return common_edit(Branch, Bank(), 'notifyedit_bank.html')
 
 # stuff
 @main.route('/notifylist_stuff', methods=['GET', 'POST'])

@@ -11,10 +11,10 @@ class CfgNotifyForm(FlaskForm):
 	status = BooleanField('生效标识', default=True)
 	submit = SubmitField('提交')
 
-class BankClass(FlaskForm):
-	bankName = StringField('支行名', validators=[Length(0, 20, message='长度不正确')])
+class Bank(FlaskForm):
+	bankName = StringField('支行名', validators=[Length(0, 20, message='长度不正确')],default = "afs")
 	bankCity = StringField('城市', validators=[Length(0, 20, message='长度不正确')])
-	bankAsset = IntegerField('资产', validators=[Length(0,20,message='长度不正确')])
+	bankAsset = IntegerField('资产')
 	submit = SubmitField('提交')
 
 class account(FlaskForm):
