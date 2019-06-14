@@ -66,7 +66,6 @@ class Branch(BaseModel):
     class Meta:
         tablename = 'branch'
 
-
 class Department(BaseModel):
     """
     部门类
@@ -81,7 +80,6 @@ class Department(BaseModel):
     class Meta:
         tablename = 'department'
         primary_key = CompositeKey('branchName', 'deptId')
-
 
 class ChequeAccount(BaseModel):
     """
@@ -130,7 +128,6 @@ class Staff(BaseModel):
     class Meta:
         tablename = 'staff'
 
-
 class Client(BaseModel):
     """
     客户类
@@ -148,7 +145,6 @@ class Client(BaseModel):
     class Meta:
         tablename = 'client'
 
-
 class Loan(BaseModel):
     """
     贷款类
@@ -163,8 +159,6 @@ class Loan(BaseModel):
     class Meta:
         tablename = 'loan'
         primary_key = CompositeKey('branchName', 'loanId')
-
-
 
 class Grant(BaseModel):
     """
@@ -184,7 +178,6 @@ class Grant(BaseModel):
 
 
 # ===== relationship ======
-
 class OpenDepositAccount(BaseModel):
     """
     开设储蓄账户
@@ -207,7 +200,6 @@ class OpenChequeAccount(BaseModel):
     class Meta:
         tablename = 'openchequeaccount'
         primary_key = CompositeKey('accountId', 'clientId')
-
 class ServiceRelationship(BaseModel):
     """
     业务关系，描述客户与银行的联系
@@ -255,33 +247,13 @@ class Serve(BaseModel):
     服务。员工服务客户的关系。
     """
 
-    clientId = ForeignKeyField(Client, primary_key=True)
-    staffId = ForeignKeyField(Staff, primary_key=True)
+    clientId = ForeignKeyField(Client)
+    staffId = ForeignKeyField(Staff)
     ServiceType = UUIDField()
 
     class Meta:
         tablename = 'serve'
         primary_key = CompositeKey('clientId', 'staffId')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # =============== Database =================
@@ -294,7 +266,9 @@ def load_user(user_id):
 # 建表
 def create_table():
     db.connect()
-    db.create_tables([CfgNotify, User])
+    db.create_tables([Branch, Department,Staff,Client])
+    db.create_tables([ChequeAccount,DepositAccount,Loan,Grant])
+    db.create_tables([OpenDepositAccount,OpenChequeAccount,ServiceRelationship,OpenAccount,OwnLoan,Serve])
 
 
 if __name__ == '__main__':
