@@ -6,6 +6,7 @@ from app import utils
 from app.models import CfgNotify,Branch
 from app.main.forms import CfgNotifyForm,Bank
 from . import main
+from playhouse.shortcuts import dict_to_model, model_to_dict
 
 logger = get_logger(__name__)
 cfg = get_config()
@@ -51,7 +52,7 @@ def common_edit(DynamicModel, form, view):
             if form.validate_on_submit():
                 print(form.bankName)
                 utils.form_to_model(form, model)
-                model.save()
+                model.save(force_insert = True)
                 flash('修改成功')
             else:
                 utils.flash_errors(form)
@@ -60,8 +61,8 @@ def common_edit(DynamicModel, form, view):
         if form.validate_on_submit():
             model = DynamicModel()
             utils.form_to_model(form, model)
-            print(form.bankName)
-            model.save()
+            dct = model_to_dict(model)
+            DynamicModel.insert(dct).execute()
             flash('保存成功')
         else:
             utils.flash_errors(form)

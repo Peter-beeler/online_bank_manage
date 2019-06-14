@@ -12,9 +12,9 @@ class CfgNotifyForm(FlaskForm):
 	submit = SubmitField('提交')
 
 class Bank(FlaskForm):
-	bankName = StringField('支行名', validators=[Length(0, 20, message='长度不正确')],default = "afs")
-	bankCity = StringField('城市', validators=[Length(0, 20, message='长度不正确')])
-	bankAsset = IntegerField('资产')
+	branchName = StringField('支行名', validators=[Length(0, 20, message='长度不正确')],default = "afs")
+	branchCity = StringField('城市', validators=[Length(0, 20, message='长度不正确')])
+	branchAsset = IntegerField('资产')
 	submit = SubmitField('提交')
 
 class account(FlaskForm):
