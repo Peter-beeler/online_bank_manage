@@ -95,3 +95,89 @@ nohup ./manage.py runserver 2>&1 &
 - [https://flask-wtf.readthedocs.io](https://flask-wtf.readthedocs.io)
 - [http://docs.peewee-orm.com](http://docs.peewee-orm.com)
 - [https://almsaeedstudio.com/preview](https://almsaeedstudio.com/preview)
+
+
+
+
+
+<!--
+
+    <div class="box-footer clearfix">
+
+​        {% if form%}
+
+​        <ul class="pagination pagination-sm no-margin pull-right">
+
+​            <li><a href="#">&laquo;</a></li>
+
+​            {% for i in range(1, form.total_page+ 1) %}
+
+​            {% if i == form.page %}
+
+​            <li><a href="?page={{i}}"><b>{{i}}</b></a></li>
+
+​            {% else %}
+
+​            <li><a href="?page={{i}}">{{i}}</a></li>
+
+​            {% endif %}
+
+​            {% endfor %}
+
+​            <li><a href="#">&raquo;</a></li>
+
+​        </ul>
+
+​        {% endif %}
+
+​    </div>-->
+
+
+
+
+
+
+
+<!--
+
+{% block scripts %}
+
+<script>
+
+​    function initPage() {
+
+​        slide_value = $(".slider").val() == "" ? 50 : parseInt($(".slider").val());
+
+​        $(".slider").slider({
+
+​            id: "blue",
+
+​            max: 100,
+
+​            value: slide_value
+
+​        });
+
+​        $('.status').bootstrapSwitch();
+
+​        $(".status").on("switchChange.bootstrapSwitch", function (event, state) {
+
+​            switchStatus($(this).data("id"), state, this);
+
+​        });
+
+​    }
+
+​    function switchStatus(id, status, switchBox) {
+
+​        restTemplate("PUT", "/notifies/" + id + "/status/" + status, null, function () {
+
+​            $($(switchBox)).bootstrapSwitch("state", status);
+
+​        });
+
+​    }
+
+</script>
+
+{% endblock %}-->

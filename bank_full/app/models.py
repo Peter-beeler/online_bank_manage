@@ -59,9 +59,9 @@ class Branch(BaseModel):
     支行类
     """
 
-    branchName = UUIDField(primary_key=True)
-    branchCity = UUIDField()
-    branchAsset = UUIDField()
+    branchName = CharField(primary_key=True)
+    branchCity = CharField()
+    branchAsset = CharField()
 
     class Meta:
         tablename = 'branch'
@@ -266,8 +266,8 @@ def load_user(user_id):
 # 建表
 def create_table():
     db.connect()
-    db.create_tables([Branch, Department,Staff,Client])
-    db.create_tables([ChequeAccount,DepositAccount,Loan,Grant])
+    db.create_tables([User,CfgNotify,Branch, Department,Staff,Client])
+    db.create_tables([ChequeAccount,DepositAccount,Loan,Grant1])
     db.create_tables([OpenDepositAccount,OpenChequeAccount,ServiceRelationship,OpenAccount,OwnLoan,Serve])
 
 

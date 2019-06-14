@@ -12,8 +12,8 @@ class CfgNotifyForm(FlaskForm):
 	submit = SubmitField('提交')
 
 class Bank(FlaskForm):
-	branchName = StringField('支行名', validators=[Length(0, 20, message='长度不正确')],default = "afs")
-	branchCity = StringField('城市', validators=[Length(0, 20, message='长度不正确')])
+	branchName = StringField('支行名', validators=[Length(0, 20, message='长度不正确')],default = "gonghang")
+	branchCity = StringField('城市', validators=[Length(0, 20, message='长度不正确')],default = "beijing")
 	branchAsset = IntegerField('资产')
 	submit = SubmitField('提交')
 

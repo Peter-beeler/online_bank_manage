@@ -7,6 +7,7 @@ from app.utils import flash_errors,form_to_model,model_to_form,query_to_list
 from app.models import *
 from app.main.forms import *
 from . import main
+
 from playhouse.shortcuts import dict_to_model, model_to_dict
 
 logger = get_logger(__name__)
@@ -16,6 +17,8 @@ cfg = get_config()
 def common_list(DynamicModel,form,view):
     # 接收参数
     action = request.args.get('action')
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    print(action)
     id = request.args.get('id')
     page = int(request.args.get('page')) if request.args.get('page') else 1
     length = int(request.args.get('length')) if request.args.get('length') else cfg.ITEMS_PER_PAGE
@@ -68,7 +71,7 @@ def common_edit(DynamicModel, form, view):
             flash('保存成功')
         else:
             flash_errors(form)
-    return render_template(view, form=form, current_user=current_user)
+    return render_template(view, form_search=form, current_user=current_user)
 
 
 # 根目录跳转
@@ -86,17 +89,77 @@ def index():
 
 
 # 支行查询
+def common_list_bank(DynamicModel,form,view):
+    # 接收参数
+    action = request.args.get('action')
+    del_name = request.args.get('id')
+    print("AAAAAAAAAAAAAAAAAAAAAAAAA")
+    print(action)
+    print(del_name)
+    model = DynamicModel()
+    form_to_model(form, model)
+    dct = model_to_dict(model)
+    name = dct['branchName']
+    city = dct['branchCity']
+    print(dct)
+    if del_name !=None:
+        print("HERE")
+        try:
+            DynamicModel.get(DynamicModel.branchName == del_name).delete_instance()
+            flash('删除成功')
+        except:
+            flash('删除失败')
+    if len(name) and len(city)  :
+        query = DynamicModel.select().where((DynamicModel.branchName == name) & (DynamicModel.branchCity == city))
+    elif len(name):
+        query = DynamicModel.select().where(DynamicModel.branchName == name) 
+    elif len(city):
+        query = DynamicModel.select().where(DynamicModel.branchCity == city)
+    else:
+        query = DynamicModel.select()
+    total_count = query.count()
+    print("BBBBBBBBBBBB")
+    print(total_count)
+    list = []
+    for e in query:
+        list.append(model_to_dict(e))
+    dict = {'content': list}
+    print(dict)
+    return render_template(view, form=dict,form_search = form,current_user=current_user)
+
+def common_edit_bank(DynamicModel, form, view):
+    # 查询是否在数据库中已经有了对应的条目
+    if form.validate_on_submit():
+        model = DynamicModel()
+        form_to_model(form, model)
+        dct = model_to_dict(model)
+        name = dct['branchName']
+        if DynamicModel.select().where(DynamicModel.branchName == name).count():  ###这一句话的含义是，通过查看对应的主码来判断是否存在对应的条目
+            ####有了
+            print("YESSSSSSSS")
+            model.save()
+            flash('修改成功')
+        else:
+            ###莫得
+            print("NOOOOOOOOO")
+            DynamicModel.insert(dct).execute()
+            flash('保存成功')
+    else:
+        flash_errors(form)
+    return render_template(view, form=form, current_user=current_user)
+   
+
 @main.route('/notifylist_bank', methods=['GET', 'POST'])
 @login_required
 def notifylist_bank():
-    return common_list(CfgNotify,CfgNotifyForm(), 'notifylist_bank.html')
+    return common_list_bank(Branch, Bank(), 'notifylist_bank.html')
 
 
 # 支行管理
 @main.route('/notifyedit_bank', methods=['GET', 'POST'])
 @login_required
 def notifyedit_bank():
-    return common_edit(Branch, Bank(), 'notifyedit_bank.html')
+    return common_edit_bank(Branch, Bank(), 'notifyedit_bank.html')
 
 # stuff
 @main.route('/notifylist_stuff', methods=['GET', 'POST'])

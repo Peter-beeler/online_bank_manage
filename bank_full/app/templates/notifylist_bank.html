@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block title %}支行查询{% endblock %}
+
+
 {% block navbar %}
 <section class="content-header">
     <h1>支行查询</h1>
@@ -26,25 +28,24 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>支行名称</label>
-                    {{form_search.notify_name(class_="form-control",placeholder="请输入")}}
+                    {{form_search.branchName(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label>城市</label>
-                    {{form_search.notify_name(class_="form-control",placeholder="请输入")}}
+                    {{form_search.branchCity(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label>资产</label>
-                    {{form_search.notify_name(class_="form-control",placeholder="请输入")}}
+                    {{form_search.branchAsset(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
         </div>
         <div class="box-footer">
-            <div class="col-md-12">
-                
+            <div class="col-md-12" href='?id=None'>
                 {{form_search.submit(class_="btn btn-primary pull-right")}}
             </div>
         </div>
@@ -72,27 +73,11 @@
                 <td>{{row.branchCity}}</td>
                 <td>{{row.branchAssets}}</td>
                 <td><a class='fa fa-lg fa-edit text-light-blue'
-                       href='{{ url_for("main.notifyedit", id=row.id) }}'></a></td>
-                <td><a class='fa fa-lg fa-warning text-red' href='?action=del&id={{row.id}}'></a></td>
+                       href='{{ url_for("main.notifyedit_bank", id=row.id) }}'></a></td>
+                <td><a class='fa fa-lg fa-warning text-red' href='?id={{row.branchName}}'></a></td>
             </tr>
             {% endfor %}
         </table>
-        {% endif %}
-    </div>
-
-    <div class="box-footer clearfix">
-        {% if form%}
-        <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">&laquo;</a></li>
-            {% for i in range(1, form.total_page+ 1) %}
-            {% if i == form.page %}
-            <li><a href="?page={{i}}"><b>{{i}}</b></a></li>
-            {% else %}
-            <li><a href="?page={{i}}">{{i}}</a></li>
-            {% endif %}
-            {% endfor %}
-            <li><a href="#">&raquo;</a></li>
-        </ul>
         {% endif %}
     </div>
 </div>
@@ -100,23 +85,22 @@
 
 {% block scripts %}
 <script>
-    function initPage() {
-        slide_value = $(".slider").val() == "" ? 50 : parseInt($(".slider").val());
-        $(".slider").slider({
-            id: "blue",
-            max: 100,
-            value: slide_value
-        });
-
-        $('.status').bootstrapSwitch();
-        $(".status").on("switchChange.bootstrapSwitch", function (event, state) {
-            switchStatus($(this).data("id"), state, this);
-        });
-    }
-    function switchStatus(id, status, switchBox) {
-        restTemplate("PUT", "/notifies/" + id + "/status/" + status, null, function () {
-            $($(switchBox)).bootstrapSwitch("state", status);
-        });
-    }
+​    function initPage() {
+​        slide_value = $(".slider").val() == "" ? 50 : parseInt($(".slider").val());
+​        $(".slider").slider({
+​            id: "blue",
+​            max: 100,
+​            value: slide_value
+​        });
+​        $('.status').bootstrapSwitch();
+​        $(".status").on("switchChange.bootstrapSwitch", function (event, state) {
+​            switchStatus($(this).data("id"), state, this);
+​        });
+​    }
+​    function switchStatus(id, status, switchBox) {
+​        restTemplate("PUT", "/notifies/" + id + "/status/" + status, null, function () {
+​            $($(switchBox)).bootstrapSwitch("state", status);
+​        });
+​    }
 </script>
 {% endblock %}
