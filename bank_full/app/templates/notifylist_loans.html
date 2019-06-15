@@ -42,8 +42,14 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>已支付</label>
+                    <label>逐次支付</label>
                     {{form_search.payNum(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>所属客户ID</label>
+                    {{form_search.Related_Customer(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
         </div>
@@ -68,7 +74,8 @@
                 <th>支行</th>
                 <th>ID</th>
                 <th>贷款数额</th>
-                <th>已支付</th>
+                <th>逐次支付</th>
+                <th>支付情况</th>
                 <th>编辑</th>
                 <th>删除</th>
             </tr>
@@ -78,6 +85,7 @@
                 <td>{{row.loanId}}</td>
                 <td>{{row.loanAmount}}</td>
                 <td>{{row.payNum}}</td>
+                <th>{{row.state}}</th>
                 <td><a class='fa fa-lg fa-edit text-light-blue'
                        href='{{ url_for("main.notifyedit_loans", id=row.id) }}'></a></td>
                 <td><a class='fa fa-lg fa-warning text-red' href='?action=del&id={{row.loanId}}'></a></td>

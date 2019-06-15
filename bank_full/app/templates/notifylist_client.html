@@ -73,6 +73,12 @@
                     {{form_search.contactRelation(class_="form-control",placeholder="请输入")}}
                 </div>
             </div>
+             <div class="col-md-6">
+                <div class="form-group">
+                    <label>负责人ID</label>
+                    {{form_search.Related_Staff(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
         </div>
         <div class="box-footer">
             <div class="col-md-12">
@@ -100,6 +106,8 @@
                 <th>联系人手机</th>
                 <th>联系人邮箱</th>
                 <th>联系人与客户关系</th>
+                
+                <th>负责人ID</th> 
                 <th>编辑</th>
                 <th>删除</th>
             </tr>
@@ -113,6 +121,7 @@
                 <td>{{row.contactPhone}}</td>
                 <td>{{row.contactEmail}}</td>
                 <td>{{row.contactRelation}}</td>
+                <td>{{row.Related_Staff}}</td>
                 <td><a class='fa fa-lg fa-edit text-light-blue'
                        href='{{ url_for("main.notifyedit_client", id=row.id) }}'></a></td>
                 <td><a class='fa fa-lg fa-warning text-red' href='?action=del&id={{row.id}}'></a></td>

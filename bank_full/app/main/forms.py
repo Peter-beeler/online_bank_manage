@@ -24,6 +24,8 @@ class account(FlaskForm):
 	openTime  = DateField('开户时间')
 	visitTime = DateField('访问时间')
 	creditLimit = FloatField('额度')
+
+	Related_Customer = StringField('所属客户ID', validators=[Length(0,20,message='长度不正确')],default = '0000')
 	submit = SubmitField('提交')
 
 class account2(FlaskForm):
@@ -34,6 +36,8 @@ class account2(FlaskForm):
 	visitTime = DateField('访问时间')
 	interestRate = FloatField('利率')
 	currencyType = StringField('货币类型', validators=[Length(0, 20, message='长度不正确')])
+
+	Related_Customer = StringField('所属客户ID', validators=[Length(0,20,message='长度不正确')],default = '0000')
 	submit = SubmitField('提交')
 
 class client(FlaskForm):
@@ -45,6 +49,8 @@ class client(FlaskForm):
 	contactPhone = StringField('联系人电话', validators=[Length(0,20,message='长度不正确')])
 	contactEmail = StringField('联系人邮件', validators=[Length(0,40,message='长度不正确')])
 	contactRelation = StringField('与本人关系', validators=[Length(0,10,message='长度不正确')])
+	
+	Related_Staff = StringField('负责人ID', validators=[Length(0,40,message='长度不正确')], default = '0000')
 	submit = SubmitField('提交')
 
 class loans(FlaskForm):
@@ -52,7 +58,10 @@ class loans(FlaskForm):
 	loanId = StringField('ID', validators=[Length(0,6,message='长度不正确')],default = '0000')
 	loanAmount = FloatField('数额')
 	payNum = IntegerField('逐次支付')
+
+	Related_Customer = StringField('所属客户ID', validators=[Length(0,20,message='长度不正确')],default = '0000')
 	submit = SubmitField('提交')
+
 
 
 class grant(FlaskForm):
