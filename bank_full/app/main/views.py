@@ -32,12 +32,12 @@ def root():
 ############4.统计出存储账户的总金额
 
 
-def Select_All_Info():
+def Select_All_Info(view):
     ############一个dict：
     ############dict的key为支行，映射到支行所属的一个列表 [[[业务金额，总用户数],[],[]],[[],[],[]]]
     ############对于每一个支行，第一个表示的是储蓄业务，第二个表示的是贷款业务
 
-    All_Info_dict = dict()
+    All_Info_dict = []
     #*************1.select出所有的支行名字**********#
     branch_info = Branch.select()
     branch_name = []
@@ -226,16 +226,20 @@ def Select_All_Info():
 
         Info.append(total_user)
         print(Info)
-        All_Info_dict[e] = Info
+        temp = {}
+        temp['branchName'] = e
+        temp["info"] = Info
+        All_Info_dict.append(temp)
         print("ENDOFALOOP")
         print("")
-    print(All_Info_dict)
-    return All_Info_dict
+    rel = {'content': All_Info_dict}
+    print(rel)
+    return render_template(view,form = rel,current_user = current_user)
 
 @main.route('/index', methods=['GET'])
 @login_required
 def index():
-    All_Info_dict = Select_All_Info()
+
     return render_template('index.html', current_user=current_user)
 
 
@@ -880,4 +884,7 @@ def notifyedit_loans():
 def notifyedit_loans2():
     return common_edit_grant(Grant1, grant(), 'notifyedit_loans2.html')
 
-
+@main.route('/notifyedit_info', methods=['GET', 'POST'])
+@login_required
+def notifylist_info():
+    return Select_All_Info('notifylist_info.html')

@@ -4,10 +4,10 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    SECRET_KEY = "12345678"
+    SECRET_KEY = "123456"
     DB_HOST = '127.0.0.1'
     DB_USER = 'root'
-    DB_PASSWD = '123456'
+    DB_PASSWD = '12345678'
     DB_DATABASE = 'bank'
     ITEMS_PER_PAGE = 10
     JWT_AUTH_URL_RULE = '/api/auth'
