@@ -7,6 +7,8 @@ from app.utils import flash_errors,form_to_model,model_to_form,query_to_list
 from app.models import *
 from app.main.forms import *
 from . import main
+import datetime
+from peewee import *
 
 from playhouse.shortcuts import dict_to_model, model_to_dict
 
@@ -22,9 +24,218 @@ def root():
 
 
 # 首页
+
+
+############2.根据支行的信息去查找所有对应支行的存储账户和支票账户
+############2.根据支行的信息去查找所有的用户
+############3.根据存储账户和支票账户的实践进行筛选
+############4.统计出存储账户的总金额
+
+
+def Select_All_Info():
+    ############一个dict：
+    ############dict的key为支行，映射到支行所属的一个列表 [[[业务金额，总用户数],[],[]],[[],[],[]]]
+    ############对于每一个支行，第一个表示的是储蓄业务，第二个表示的是贷款业务
+
+    All_Info_dict = dict()
+    #*************1.select出所有的支行名字**********#
+    branch_info = Branch.select()
+    branch_name = []
+    
+    year_date   = datetime.datetime(2019,1,1)
+    season_date = datetime.datetime(2019,3,1)
+    month_date  = datetime.datetime(2019,6,1)
+    print(year_date)
+    print(season_date)
+    print(month_date)
+
+    for e in branch_info:
+        branch_name.append( model_to_dict(e)['branchName'] )
+    ####得到了所有的支行名称
+    for e in branch_name:
+        #**********根据每一个支行的名字进行选择***********#
+        Info = []
+        print(e)
+        print(":AAAAAAAAAAAAAAAAAA")
+        ######查找按年计算的储蓄金额
+        deposit_query = OpenAccount.select( OpenAccount.depositAccountId ).distinct().where((OpenAccount.branchName == e) 
+                                                and (OpenAccount.chequeAccountId == 'ffff' ))
+        ######查找按季计算的储蓄金额
+
+        ######查找按月计算的储蓄金额
+        ######查找贷款
+        branch_info = Branch.select().where(Branch.branchName == e)
+        loan_query = Loan.select().distinct( Loan.loanId).where(Loan.branchName == branch_info )
+        ########以上，得到了所有相关的存储账户和支票账户的ID,即属于该支行的存储/支票账户的ID
+        #####
+
+        #*****************************以下检索不同类型的账户涉及的金额数********************
+        deposit_money_list=[]
+        deposit_money_number = DepositAccount.select(
+                                                fn.SUM(DepositAccount.accountBalance).alias("sum")
+                                                ).where(
+                                                    (DepositAccount.branchName == e) &
+                                                    (DepositAccount.visitTime > year_date)
+                                                ).execute()
+        print("EEEEEEEEEEEEEEEEEEEE")
+        for m in deposit_money_number:
+            if m.sum !=None:
+                deposit_money_list.append(m.sum)
+            else:
+                deposit_money_list.append(0.0)
+            break
+
+        deposit_money_number = DepositAccount.select(
+                                                fn.SUM(DepositAccount.accountBalance).alias("sum")
+                                                ).where(
+                                                    (DepositAccount.branchName == e) &
+                                                    (DepositAccount.visitTime > season_date)
+                                                ).execute()
+        print("EEEEEEEEEEEEEEEEEEEE")
+        for m in deposit_money_number:
+            if m.sum !=None:
+                deposit_money_list.append(m.sum)
+            else:
+                deposit_money_list.append(0.0)
+            break
+
+        deposit_money_number = DepositAccount.select(
+                                                fn.SUM(DepositAccount.accountBalance).alias("sum")
+                                                ).where(
+                                                    (DepositAccount.branchName == e) &
+                                                    (DepositAccount.visitTime > month_date)
+                                                ).execute()
+        print("EEEEEEEEEEEEEEEEEEEE")
+        for m in deposit_money_number:
+            if m.sum !=None:
+                deposit_money_list.append(m.sum)
+            else:
+                deposit_money_list.append(0.0)
+            break
+        '''
+        这一部分实现了贷款总发放金额的统计
+        '''
+        loan_money_list = []
+        loan_money_number = Grant1.select(fn.SUM(Grant1.grantMoney).alias("sum")).where(
+                                                    (Grant1.branchName == e) &
+                                                    (Grant1.grantTime > year_date)
+                                                ).execute()
+        for m in loan_money_number:
+            if m.sum !=None:
+                loan_money_list.append(m.sum)
+            else:
+                loan_money_list.append(0.0)
+            break
+        print("$$$$$$$$$$$$$$$$$$")
+        print(loan_money_list)
+        loan_money_number = Grant1.select(fn.SUM(Grant1.grantMoney).alias("sum")).where(
+                                                    (Grant1.branchName == e) &
+                                                    (Grant1.grantTime > season_date)
+                                                ).execute()
+        for m in loan_money_number:
+            if m.sum !=None:
+                loan_money_list.append(m.sum)
+            else:
+                loan_money_list.append(0.0)
+            break
+        print(loan_money_list)
+        loan_money_number = Grant1.select(fn.SUM(Grant1.grantMoney).alias("sum")).where(
+                                                    (Grant1.branchName == e) &
+                                                    (Grant1.grantTime > month_date)
+                                                ).execute()
+        for m in loan_money_number:
+            if m.sum !=None:
+                loan_money_list.append(m.sum)
+            else:
+                loan_money_list.append(0.0)
+            break
+        print(loan_money_list)
+        total_money = []
+        total_money.append(deposit_money_list)
+        total_money.append(loan_money_list)
+        Info.append(total_money)
+        #******************************以下检索不同类型的活跃用户***************************
+        '''
+        这一部分实现了储蓄用户的检索，join用于聚集
+        '''
+        deposit_user_list = []
+        deposit_user_number  = OpenAccount.select(OpenAccount.id).distinct().join(
+                                                DepositAccount,on=(
+                                                    DepositAccount.id == OpenAccount.depositAccountId
+                                                )).where(
+                                                (OpenAccount.branchName == e) &
+                                                (OpenAccount.chequeAccountId == 'ffff') &
+                                                (DepositAccount.visitTime > year_date)
+                                            ).count()   
+        deposit_user_list.append(deposit_user_number)  
+        deposit_user_number  = OpenAccount.select(OpenAccount.id).distinct().join(
+                                                DepositAccount,on=(
+                                                    DepositAccount.id == OpenAccount.depositAccountId
+                                                )).where(
+                                                (OpenAccount.branchName == e) &
+                                                (OpenAccount.chequeAccountId == 'ffff') &
+                                                (DepositAccount.visitTime > season_date)
+                                            ).count()
+        deposit_user_list.append(deposit_user_number)
+        deposit_user_number  = OpenAccount.select(OpenAccount.id).distinct().join(
+                                                DepositAccount,on=(
+                                                    DepositAccount.id == OpenAccount.depositAccountId
+                                                )).where(
+                                                (OpenAccount.branchName == e) &
+                                                (OpenAccount.chequeAccountId == 'ffff') &
+                                                (DepositAccount.visitTime > month_date)
+                                            ).count()
+        deposit_user_list.append(deposit_user_number)
+        '''
+        虽然巨丑，但是实现了贷款用户的检索，首先join用于聚集，distinct用于查找不同的用户
+        where语句中表示的是：当前支行的贷款情况+这一段时间之内拥有付款记录
+        该类型的用户就可以被视为这一段时间的活跃用户数，表示银行与其产生了py关系
+        '''   
+        loan_user_list = []
+        loan_user_number    = OwnLoan.select(OwnLoan.clientId).distinct().join(
+                                                Grant1,on=(
+                                                    (Grant1.loanId == OwnLoan.loanId) &
+                                                    (Grant1.branchName == OwnLoan.branchName) 
+                                                )).where(
+                                                    (OwnLoan.branchName == e) &
+                                                    (Grant1.grantTime > year_date)
+                                            ).count()
+        loan_user_list.append(loan_user_number)
+        loan_user_number    = OwnLoan.select(OwnLoan.clientId).distinct().join(
+                                                Grant1,on=(
+                                                    (Grant1.loanId == OwnLoan.loanId) &
+                                                    (Grant1.branchName == OwnLoan.branchName) 
+                                                )).where(
+                                                    (OwnLoan.branchName == e) &
+                                                    (Grant1.grantTime > season_date)
+                                            ).count()
+        loan_user_list.append(loan_user_number)
+        loan_user_number    = OwnLoan.select(OwnLoan.clientId).distinct().join(
+                                                Grant1,on=(
+                                                    (Grant1.loanId == OwnLoan.loanId) &
+                                                    (Grant1.branchName == OwnLoan.branchName) 
+                                                )).where(
+                                                    (OwnLoan.branchName == e) &
+                                                    (Grant1.grantTime > month_date)
+                                            ).count()
+        loan_user_list.append(loan_user_number)
+        print("ALLLLLLLLLLLLLLL")
+        print(deposit_user_number)
+        print(loan_user_number)
+        total_user = [deposit_user_list,loan_user_list]
+
+        Info.append(total_user)
+        print(Info)
+        All_Info_dict[e] = Info
+        print("ENDOFALOOP")
+        print("")
+    print(All_Info_dict)
+    return All_Info_dict
+
 @main.route('/index', methods=['GET'])
 @login_required
 def index():
+    All_Info_dict = Select_All_Info()
     return render_template('index.html', current_user=current_user)
 
 
@@ -39,8 +250,7 @@ def common_list_bank(DynamicModel,form,view):
     name = dct['branchName']
     city = dct['branchCity']
     print(dct)
-    if del_name !=None:   ####严重问题：由于我没有看懂html代码，因此这里每次执行删除操作后似乎没法继续查找，只有退出再进来才行
-        ######################总之就是显示的非常混乱就对了
+    if del_name !=None:   
         try:
             account_count = OpenAccount.select().where( OpenAccount.branchName == del_id).count()
             staff_count    = Staff.select().where( Staff.branchName == del_id).count()
@@ -251,11 +461,14 @@ def common_list_account(DynamicModel,form,view):
     print(dct)
     if del_id !=None:   
         try:
-            DynamicModel.get(DynamicModel.id == del_id).delete_instance()
+            print("EEEEEEEEEEEEEE")
+            print(del_id)
             ######找出所有的和当前要删除账户id相关联的账户的关系，并且挨个删除
-            query = OpenAccount.select().where((OpenAccount.depositAccount == del_id) or (OpenAccount.chequeAccount == del_id) )
+            query = OpenAccount.select().where((OpenAccount.depositAccountId == del_id) | (OpenAccount.chequeAccountId == del_id) )
+            print("AAAAAAAAAAAAA")
             for e in query:
                 e.delete_instance()
+            DynamicModel.get(DynamicModel.id == del_id).delete_instance()    
             flash('删除成功')
         except:
             flash('删除失败')
@@ -325,6 +538,7 @@ def common_edit_account(DynamicModel, form, view):
                 print("有存储账户了！")
                 flag_deposit = 0
         flag = 0
+        no_user = 0
         print(credit)
         print(flag_deposit)
         if (flag_deposit and  credit == 0 ) or (flag_cheque and  credit):  
@@ -333,7 +547,8 @@ def common_edit_account(DynamicModel, form, view):
                 flag = 1    #####表明此时可以插入新的账户
                 OpenAccount.insert(A_dict).execute()
             except:
-                flash("？？？？")
+                no_user = 1
+                flash("无法插入账户，相关用户不存在于银行记录中！")
         else:#########此时表明不可以继续插账户了
             flash("该用户不可继续增加账户")
         if DynamicModel.select().where(DynamicModel.id == id).count():  ###这一句话的含义是，通过查看对应的主码来判断是否存在对应的条目
@@ -342,7 +557,7 @@ def common_edit_account(DynamicModel, form, view):
             flash('修改成功')
         else:####如果说该账户尚未存在，且与该账户关联的用户已经达到了上限
             ###莫得
-            if flag == 1:
+            if flag == 1 and no_user == 0:
                 print(dct)
                 DynamicModel.insert(dct).execute()
                 flash('账户保存成功')
@@ -428,37 +643,60 @@ def common_edit_loan(DynamicModel, form, view):
         dct = model_to_dict(model)
         dct['branchName'] = dct['branchName']['branchName']
         id = dct['loanId']
-        if DynamicModel.select().where(DynamicModel.loanId == id).count():  ###这一句话的含义是，通过查看对应的主码来判断是否存在对应的条目
+        no_user = 0
+        if OwnLoan.select().where((OwnLoan.clientId == request.form['Related_Customer']) & (OwnLoan.loanId == request.form['loanId']) ).count() == 0:
+            ####如果说此时关系表中，用户和贷款的关系还没有被建立起来
+            try:
+                OwnLoan.insert(Loan_dict).execute()
+                flash("插入贷款新拥有者成功！")
+            except:
+                flash('查无此用户！,不可插入贷款信息！')
+                no_user = 1
+        if DynamicModel.select().where(DynamicModel.loanId == id).count() :  
+            ###这一句话的含义是，通过查看对应的主码来判断是否存在对应的条目
             ####有了
             flash('不可修改已有贷款信息！')
         else:
             ###莫得
-            print(dct)
-            DynamicModel.insert(dct).execute()
-            flash('保存成功')
+            if no_user == 0:
+                print(dct)
+                DynamicModel.insert(dct).execute()
+                flash('保存成功')
     else:
         flash_errors(form)
-    if OwnLoan.select().where( (OwnLoan.clientId == request.form["Related_Customer"])
-                            and (OwnLoan.loanId == request.form['loanId']) ).count() == 0:
-        ####如果说此时关系表中，用户和贷款的关系还没有被建立起来
-        try:
-            OwnLoan.insert(Loan_dict).execute()
-        except:
-            flash('查无此员工')
     return render_template(view, form_search=form, current_user=current_user)
 
 def common_list_grant(DynamicModel,form,view):
     # 接收参数
     del_id = request.args.get('id')   ####从html代码中得到删除的相关信息
+    del_count = request.args.get('count')
+    del_branch =request.args.get('bname') 
+    print(del_id)
+    print(del_count)
+    print(del_branch)
+    print("FFFFFFFFFFFFFF")
     model = DynamicModel()
     form_to_model(form, model)
     dct = model_to_dict(model) ####将model转化为dict，方便输出debug和输入
     this_id = dct['loanId']
     branch = dct['branchName']
     print(dct)
-    if del_id !=None:   
+    if del_id !=None and del_count !=None:   
         try:
-            DynamicModel.get(DynamicModel.loanId == del_id).delete_instance()
+            
+            print("FFFFFFFF")
+            models = DynamicModel.get( (DynamicModel.loanId == del_id)
+                                    & (DynamicModel.grantCount == del_count)
+                                    & (DynamicModel.branchName == del_branch)).delete_instance()
+            counter = DynamicModel.select().where( (DynamicModel.loanId == del_id)
+                                    & (DynamicModel.grantCount > del_count)
+                                    & (DynamicModel.branchName == del_branch)).count()
+            print(counter)
+            up = DynamicModel.update(grantCount = DynamicModel.grantCount-1).where( (DynamicModel.loanId == del_id)
+                                    & (DynamicModel.grantCount > del_count)
+                                    & (DynamicModel.branchName == del_branch))
+            up.execute()
+            
             flash('删除成功')
         except:
             flash('删除失败')
@@ -487,17 +725,67 @@ def common_edit_grant(DynamicModel, form, view):
         model = DynamicModel()
         form_to_model(form, model)
         dct = model_to_dict(model)
-        id = dct['loanId']
+        loan_id = dct['loanId']
+        branch = dct['branchName']
+        all_count = dct['grantCount']
         print(dct)
-        if DynamicModel.select().where(DynamicModel.loanId == id).count():  ###这一句话的含义是，通过查看对应的主码来判断是否存在对应的条目
+        print(all_count)
+        print(loan_id)
+        select_count = DynamicModel.select().where( (DynamicModel.loanId      == loan_id )
+                                                &   (DynamicModel.branchName  == branch)
+                                                &   (DynamicModel.grantCount  <= all_count)).count()
+        #######查找所有的grantCount小于当前值的select
+        print(select_count)
+        if select_count == all_count :  
+            ###这一句话的含义是，如果查到的数据是完整的，如输入1，查出了0,表示小于等于1的没有，可以修改
             ####有了
-            model.save()
-            flash('修改成功')
-        else:
+            print("ASDF")
+            ########当前发放的总额度数
+            actual_money = 0
+            actual_record = DynamicModel.select(DynamicModel.grantMoney).where(DynamicModel.loanId == loan_id)
+            for k in actual_record:
+                actual_money += model_to_dict(k)['grantMoney']
+            print(actual_money)
+            #######实际应当发放的总额度数
+            total_money = Loan.select().where(Loan.loanId == loan_id)
+            print(total_money.count())
+            for e in total_money:
+                money_dict = model_to_dict(e)
+                branch_name = money_dict['branchName']['branchName'] 
+                if branch_name == branch:
+                    total_money = money_dict['loanAmount']     
+            try:       
+                if total_money < actual_money + dct['grantMoney']:
+                    flash("修改失败，发放贷款的数额超过了可以发放的总额")
+                else:
+                    model.save()
+                    flash('修改成功')
+            except:
+                flash("无法修改，无此支行或ID！")
+        elif select_count == all_count-1:  ######如果是顺序的
             ###莫得
-            print(dct)
-            DynamicModel.insert(dct).execute()
-            flash('保存成功')
+
+            #######当前发放的总额度
+            actual_money = 0
+            actual_record = DynamicModel.select(DynamicModel.grantMoney).where(DynamicModel.loanId == loan_id)
+            for k in actual_record:
+                actual_money += model_to_dict(k)['grantMoney']
+            print(actual_money)
+            ######实际应当发放的总金额
+            total_money = Loan.select().where(Loan.loanId == loan_id)
+            print(total_money.count())
+            for e in total_money:
+                money_dict = model_to_dict(e)
+                branch_name = money_dict['branchName']['branchName'] 
+                if branch_name == branch:
+                    total_money = money_dict['loanAmount']            
+            if total_money < actual_money + dct['grantMoney']:
+                flash("插入失败，发放贷款的数额超过了可以发放的总额")
+            else:
+                DynamicModel.insert(dct).execute()
+                flash('保存成功')
+        else:
+            flash("未按序发放贷款")
     else:
         flash_errors(form)
     return render_template(view, form_search=form, current_user=current_user)
