@@ -1,6 +1,6 @@
 from app import get_logger, get_config
 import math
-from flask import render_template, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, flash, request,jsonify
 from flask_login import login_required, current_user
 from app import utils
 from app.utils import flash_errors,form_to_model,model_to_form,query_to_list
@@ -819,6 +819,10 @@ def common_edit_grant(DynamicModel, form, view):
 #*********************在插入贷款的时候，需要添加到用户和
 
 
+def chart_create(view):
+    temp = ['BOC','Wells','CBC','BOA','AOC']
+    return render_template(view,form = temp)
+
 @main.route('/notifylist_bank', methods=['GET', 'POST'])
 @login_required
 def notifylist_bank():
@@ -909,3 +913,18 @@ def notifyedit_loans2():
 @login_required
 def notifylist_info():
     return Select_All_Info('notifylist_info.html')
+
+@main.route('/chart2', methods=['GET', 'POST'])
+@login_required
+def chart2():
+    a = [1,2,3,4,5]
+    b = [1,2,3,4,5]
+    c = [1,2,3,4,5]
+    d = [1,2,3,4,5]
+    return jsonify(a=a,b=b,c=c,d=d)
+
+@main.route('/chart', methods=['GET', 'POST'])
+@login_required
+def chart():
+    return render_template("chart.html",form = [1,2,3,4,4])
+
