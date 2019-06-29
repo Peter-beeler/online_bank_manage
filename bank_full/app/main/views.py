@@ -334,7 +334,7 @@ def common_list_client(DynamicModel,form,view):
             if account_count + loan_count == 0:
                 DynamicModel.get(DynamicModel.id == del_id).delete_instance()
                 print("OOOOOOOOOOOOO")
-                Serve.get(Serve.clientId == del_id ).delete_instance()
+                Serve.delete().where(Serve.clientId == del_id ).execute()
                 flash('删除成功')
             else:
                 flash('该用户与账户/贷款存在着绑定关系，无法删除')
