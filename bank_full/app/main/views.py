@@ -327,15 +327,17 @@ def common_list_client(DynamicModel,form,view):
             '''
             #########同步添加
             #######寻找是否存在着关联的账户或者贷款
+            print("PPPPPPPPPPPP")
             account_count = OpenAccount.select().where( OpenAccount.id == del_id).count()
             loan_count    = OwnLoan.select().where( OwnLoan.clientId == del_id).count()
+            print("SSSSSSSSSS")
             if account_count + loan_count == 0:
                 DynamicModel.get(DynamicModel.id == del_id).delete_instance()
-                Serve.get(Serve.id == del_id ).delete_instance()
+                print("OOOOOOOOOOOOO")
+                Serve.get(Serve.clientId == del_id ).delete_instance()
                 flash('删除成功')
             else:
                 flash('该用户与账户/贷款存在着绑定关系，无法删除')
-            flash('删除成功')
         except:
             flash('删除失败')
     ####根据不同的现有数据进行查询，接下来的一些实现中可以放宽需求。
@@ -468,7 +470,16 @@ def common_list_account(DynamicModel,form,view):
     dct = model_to_dict(model) ####将model转化为dict，方便输出debug和输入
     this_id = dct['id']
     branchname = dct['branchName']
-    dct['branchName'] = dct['branchName']['branchName']
+    if branchname == None:
+        branchname = ''
+    if this_id == None:
+        this_id = ''
+    print(len(this_id))
+    try:
+        branchname = dct['branchName']['branchName']
+    except: 
+        branchname = ''
+    print(len(branchname))
     print(dct)
     if del_id !=None:   
         try:
@@ -484,13 +495,13 @@ def common_list_account(DynamicModel,form,view):
         except:
             flash('删除失败')
     ####根据不同的现有数据进行查询，接下来的一些实现中可以放宽需求。
-    branch = Branch.select().where(Branch.branchName == branchname)
-    if len(this_id) and len(branch) :
-        query = DynamicModel.select().where((DynamicModel.id == this_id)  & (DynamicModel.branchName == branch))
+    #branch = Branch.select().where(Branch.branchName == branchname)
+    if len(this_id) and len(branchname) :
+        query = DynamicModel.select().where((DynamicModel.id == this_id)  & (DynamicModel.branchName == branchname))
     elif len(this_id):
         query = DynamicModel.select().where(DynamicModel.id == this_id)
-    elif len(branch):
-        query = DynamicModel.select().where(DynamicModel.branchName == branch)
+    elif len(branchname):
+        query = DynamicModel.select().where(DynamicModel.branchName == branchname)
     else:
         query = DynamicModel.select()
     total_count = query.count()
@@ -589,7 +600,10 @@ def common_list_loan(DynamicModel,form,view):
     form_to_model(form, model)
     dct = model_to_dict(model) ####将model转化为dict，方便输出debug和输入
     this_id = dct['loanId']
-    branchname = dct['branchName']['branchName']
+    try:
+        branchname = dct['branchName']['branchName']
+    except:
+        branchname = ''
     print(dct)
     if del_id !=None:   
         try:
@@ -661,7 +675,7 @@ def common_edit_loan(DynamicModel, form, view):
                 OwnLoan.insert(Loan_dict).execute()
                 flash("插入贷款新拥有者成功！")
             except:
-                flash('查无此用户！,不可插入贷款信息！')
+                flash('查无此用户！,不可插入新贷款拥有者！')
                 no_user = 1
         if DynamicModel.select().where(DynamicModel.loanId == id).count() :  
             ###这一句话的含义是，通过查看对应的主码来判断是否存在对应的条目
