@@ -253,18 +253,22 @@ def common_list_bank(DynamicModel,form,view):
     dct = model_to_dict(model) ####将model转化为dict，方便输出debug和输入
     name = dct['branchName']
     city = dct['branchCity']
+    print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     print(dct)
     if del_name !=None:   
         try:
-            account_count = OpenAccount.select().where( OpenAccount.branchName == del_id).count()
-            staff_count    = Staff.select().where( Staff.branchName == del_id).count()
-            if account_count + staff_count:
-                DynamicModel.get(DynamicModel.id == del_id).delete_instance()
-                Serve.get(DynamicModel.id == del_id ).delete_instance()
+            account_count = OpenAccount.select().where( OpenAccount.branchName == del_name).count()
+            print("SSSSSSSSSSS")
+            staff_count    = Staff.select().where( Staff.branchName == del_name).count()
+            print(account_count)
+            print(staff_count)
+            if account_count + staff_count == 0:
+                print("dddddd")
+                DynamicModel.get(DynamicModel.branchName == del_name).delete_instance()
+                #Serve.get(DynamicModel.id == del_name).delete_instance()
                 flash('删除成功')
             else:
                 flash('该支行与账户/员工存在着绑定关系，无法删除')
-            flash('删除成功')
         except:
             flash('删除失败')
     ####根据不同的现有数据进行查询，接下来的一些实现中可以放宽需求。
@@ -325,9 +329,9 @@ def common_list_client(DynamicModel,form,view):
             #######寻找是否存在着关联的账户或者贷款
             account_count = OpenAccount.select().where( OpenAccount.id == del_id).count()
             loan_count    = OwnLoan.select().where( OwnLoan.clientId == del_id).count()
-            if account_count + loan_count:
+            if account_count + loan_count == 0:
                 DynamicModel.get(DynamicModel.id == del_id).delete_instance()
-                Serve.get(DynamicModel.id == del_id ).delete_instance()
+                Serve.get(Serve.id == del_id ).delete_instance()
                 flash('删除成功')
             else:
                 flash('该用户与账户/贷款存在着绑定关系，无法删除')
@@ -397,18 +401,21 @@ def common_list_staff(DynamicModel,form,view):
     dct = model_to_dict(model) ####将model转化为dict，方便输出debug和输入
     name = dct['staffName']
     branch = dct['branchName']
+    print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     this_id = dct['id']
     print(dct)
     if del_id !=None:   
         try:
             #######寻找是否存在着关联的账户或者贷款
-            Serve_count = Serve.select().where( Serve.staffId == del_id).count()
-            #loan_count    = OwnLoan.select().where( OwnLoan.clientId == del_id)
-            if Serve_count:
+            print("QAW")
+            print(del_id)
+            Serve_count = Serve.select().where(Serve.staffId == del_id).count()
+            print("QQQQQQQQQQQQQQQQQQ")
+            if Serve_count == 0:
                 DynamicModel.get(DynamicModel.id == del_id).delete_instance()
                 flash('删除成功')
             else:
-                flash('该用户与相关服务客户存在着绑定关系，无法删除')
+                flash('该用户与相关客户存在着服务绑定关系，无法删除')
         except:
             flash('删除失败')
     ####根据不同的现有数据进行查询，接下来的一些实现中可以放宽需求。
