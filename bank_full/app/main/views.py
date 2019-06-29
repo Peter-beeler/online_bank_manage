@@ -923,11 +923,215 @@ def notifylist_info():
 @main.route('/chart2', methods=['GET', 'POST'])
 @login_required
 def chart2():
-    a = [1,2,3,4,5]
-    b = [1,2,3,4,5]
-    c = [1,2,3,4,5]
-    d = [1,2,3,4,5]
-    return jsonify(a=a,b=b,c=c,d=d)
+    All_Info_dict = []
+    #*************1.select出所有的支行名字**********#
+    branch_info = Branch.select()
+    branch_name = []
+    
+    year_date   = datetime.datetime(2019,1,1)
+    season_date = datetime.datetime(2019,3,1)
+    month_date  = datetime.datetime(2019,6,1)
+    print(year_date)
+    print(season_date)
+    print(month_date)
+
+    for e in branch_info:
+        branch_name.append( model_to_dict(e)['branchName'] )
+    ####得到了所有的支行名称
+    for e in branch_name:
+        #**********根据每一个支行的名字进行选择***********#
+        Info = []
+        print(e)
+        print(":AAAAAAAAAAAAAAAAAA")
+        ######查找按年计算的储蓄金额
+        deposit_query = OpenAccount.select( OpenAccount.depositAccountId ).distinct().where((OpenAccount.branchName == e) 
+                                                and (OpenAccount.chequeAccountId == 'ffff' ))
+        ######查找按季计算的储蓄金额
+
+        ######查找按月计算的储蓄金额
+        ######查找贷款
+        branch_info = Branch.select().where(Branch.branchName == e)
+        loan_query = Loan.select().distinct( Loan.loanId).where(Loan.branchName == branch_info )
+        ########以上，得到了所有相关的存储账户和支票账户的ID,即属于该支行的存储/支票账户的ID
+        #####
+
+        #*****************************以下检索不同类型的账户涉及的金额数********************
+        deposit_money_list=[]
+        deposit_money_number = DepositAccount.select(
+                                                fn.SUM(DepositAccount.accountBalance).alias("sum")
+                                                ).where(
+                                                    (DepositAccount.branchName == e) &
+                                                    (DepositAccount.visitTime > year_date)
+                                                ).execute()
+        print("EEEEEEEEEEEEEEEEEEEE")
+        for m in deposit_money_number:
+            if m.sum !=None:
+                deposit_money_list.append(m.sum)
+            else:
+                deposit_money_list.append(0.0)
+            break
+
+        deposit_money_number = DepositAccount.select(
+                                                fn.SUM(DepositAccount.accountBalance).alias("sum")
+                                                ).where(
+                                                    (DepositAccount.branchName == e) &
+                                                    (DepositAccount.visitTime > season_date)
+                                                ).execute()
+        print("EEEEEEEEEEEEEEEEEEEE")
+        for m in deposit_money_number:
+            if m.sum !=None:
+                deposit_money_list.append(m.sum)
+            else:
+                deposit_money_list.append(0.0)
+            break
+
+        deposit_money_number = DepositAccount.select(
+                                                fn.SUM(DepositAccount.accountBalance).alias("sum")
+                                                ).where(
+                                                    (DepositAccount.branchName == e) &
+                                                    (DepositAccount.visitTime > month_date)
+                                                ).execute()
+        print("EEEEEEEEEEEEEEEEEEEE")
+        for m in deposit_money_number:
+            if m.sum !=None:
+                deposit_money_list.append(m.sum)
+            else:
+                deposit_money_list.append(0.0)
+            break
+        '''
+        这一部分实现了贷款总发放金额的统计
+        '''
+        loan_money_list = []
+        loan_money_number = Grant1.select(fn.SUM(Grant1.grantMoney).alias("sum")).where(
+                                                    (Grant1.branchName == e) &
+                                                    (Grant1.grantTime > year_date)
+                                                ).execute()
+        for m in loan_money_number:
+            if m.sum !=None:
+                loan_money_list.append(m.sum)
+            else:
+                loan_money_list.append(0.0)
+            break
+        print("$$$$$$$$$$$$$$$$$$")
+        print(loan_money_list)
+        loan_money_number = Grant1.select(fn.SUM(Grant1.grantMoney).alias("sum")).where(
+                                                    (Grant1.branchName == e) &
+                                                    (Grant1.grantTime > season_date)
+                                                ).execute()
+        for m in loan_money_number:
+            if m.sum !=None:
+                loan_money_list.append(m.sum)
+            else:
+                loan_money_list.append(0.0)
+            break
+        print(loan_money_list)
+        loan_money_number = Grant1.select(fn.SUM(Grant1.grantMoney).alias("sum")).where(
+                                                    (Grant1.branchName == e) &
+                                                    (Grant1.grantTime > month_date)
+                                                ).execute()
+        for m in loan_money_number:
+            if m.sum !=None:
+                loan_money_list.append(m.sum)
+            else:
+                loan_money_list.append(0.0)
+            break
+        print(loan_money_list)
+        total_money = []
+        total_money.append(deposit_money_list)
+        total_money.append(loan_money_list)
+        Info.append(total_money)
+        #******************************以下检索不同类型的活跃用户***************************
+        '''
+        这一部分实现了储蓄用户的检索，join用于聚集
+        '''
+        deposit_user_list = []
+        deposit_user_number  = OpenAccount.select(OpenAccount.id).distinct().join(
+                                                DepositAccount,on=(
+                                                    DepositAccount.id == OpenAccount.depositAccountId
+                                                )).where(
+                                                (OpenAccount.branchName == e) &
+                                                (OpenAccount.chequeAccountId == 'ffff') &
+                                                (DepositAccount.visitTime > year_date)
+                                            ).count()   
+        deposit_user_list.append(deposit_user_number)  
+        deposit_user_number  = OpenAccount.select(OpenAccount.id).distinct().join(
+                                                DepositAccount,on=(
+                                                    DepositAccount.id == OpenAccount.depositAccountId
+                                                )).where(
+                                                (OpenAccount.branchName == e) &
+                                                (OpenAccount.chequeAccountId == 'ffff') &
+                                                (DepositAccount.visitTime > season_date)
+                                            ).count()
+        deposit_user_list.append(deposit_user_number)
+        deposit_user_number  = OpenAccount.select(OpenAccount.id).distinct().join(
+                                                DepositAccount,on=(
+                                                    DepositAccount.id == OpenAccount.depositAccountId
+                                                )).where(
+                                                (OpenAccount.branchName == e) &
+                                                (OpenAccount.chequeAccountId == 'ffff') &
+                                                (DepositAccount.visitTime > month_date)
+                                            ).count()
+        deposit_user_list.append(deposit_user_number)
+        '''
+        虽然巨丑，但是实现了贷款用户的检索，首先join用于聚集，distinct用于查找不同的用户
+        where语句中表示的是：当前支行的贷款情况+这一段时间之内拥有付款记录
+        该类型的用户就可以被视为这一段时间的活跃用户数，表示银行与其产生了py关系
+        '''   
+        loan_user_list = []
+        loan_user_number    = OwnLoan.select(OwnLoan.clientId).distinct().join(
+                                                Grant1,on=(
+                                                    (Grant1.loanId == OwnLoan.loanId) &
+                                                    (Grant1.branchName == OwnLoan.branchName) 
+                                                )).where(
+                                                    (OwnLoan.branchName == e) &
+                                                    (Grant1.grantTime > year_date)
+                                            ).count()
+        loan_user_list.append(loan_user_number)
+        loan_user_number    = OwnLoan.select(OwnLoan.clientId).distinct().join(
+                                                Grant1,on=(
+                                                    (Grant1.loanId == OwnLoan.loanId) &
+                                                    (Grant1.branchName == OwnLoan.branchName) 
+                                                )).where(
+                                                    (OwnLoan.branchName == e) &
+                                                    (Grant1.grantTime > season_date)
+                                            ).count()
+        loan_user_list.append(loan_user_number)
+        loan_user_number    = OwnLoan.select(OwnLoan.clientId).distinct().join(
+                                                Grant1,on=(
+                                                    (Grant1.loanId == OwnLoan.loanId) &
+                                                    (Grant1.branchName == OwnLoan.branchName) 
+                                                )).where(
+                                                    (OwnLoan.branchName == e) &
+                                                    (Grant1.grantTime > month_date)
+                                            ).count()
+        loan_user_list.append(loan_user_number)
+        print("ALLLLLLLLLLLLLLL")
+        print(deposit_user_number)
+        print(loan_user_number)
+        total_user = [deposit_user_list,loan_user_list]
+
+        Info.append(total_user)
+        print(Info)
+        temp = {}
+        temp['branchName'] = e
+        temp["info"] = Info
+        All_Info_dict.append(temp)
+        print("ENDOFALOOP")
+        print("")
+    rel = All_Info_dict
+    print(rel)
+    x = []
+    a = []
+    b = []
+    c = []
+    d = []
+    for element in All_Info_dict:
+        x.append(element['branchName'])
+        a.append(int(element['info'][0][0][2]))
+        b.append(int(element['info'][0][0][0]))
+        c.append(int(element['info'][0][1][2]))
+        d.append(int(element['info'][0][1][0]))
+    return jsonify(x=x,a=a,b=b,c=c,d=d)
 
 @main.route('/chart', methods=['GET', 'POST'])
 @login_required

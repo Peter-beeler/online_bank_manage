@@ -155,7 +155,7 @@ option = {
         {
             type: 'category',
             axisTick: {show: false},
-            data: ['1','2','3','4','5']
+            data: result.x
         }
     ],
     yAxis: [
@@ -165,26 +165,26 @@ option = {
     ],
     series: [
         {
-            name: 'Forest',
+            name: 'storage_month',
             type: 'bar',
             barGap: 0,
             label: labelOption,
             data: result.a
         },
         {
-            name: 'Steppe',
+            name: 'storage_year',
             type: 'bar',
             label: labelOption,
             data: result.b
         },
         {
-            name: 'Desert',
+            name: 'loan_month',
             type: 'bar',
             label: labelOption,
             data: result.c
         },
         {
-            name: 'Wetland',
+            name: 'loan_year',
             type: 'bar',
             label: labelOption,
             data: result.d
@@ -196,7 +196,7 @@ option = {
   
 
     myChart.setOption(option);
-    alert(result);     
+    
   
         },  
          error : function(errorMsg) {  
