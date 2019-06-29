@@ -51,6 +51,7 @@ class client(FlaskForm):
 	contactRelation = StringField('与本人关系', validators=[Length(0,10,message='长度不正确')])
 	
 	Related_Staff = StringField('负责人ID', validators=[Length(0,40,message='长度不正确')], default = '0000')
+	Serve_Type = StringField('负责类型', validators=[Length(0,40,message='长度不正确')], default = 'Loan')
 	submit = SubmitField('提交')
 
 class loans(FlaskForm):

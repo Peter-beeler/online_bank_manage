@@ -368,7 +368,7 @@ def common_edit_client(DynamicModel, form, view):
         Serve_dict = dict()
         Serve_dict['clientId'] = request.form['id']
         Serve_dict['staffId']  = request.form["Related_Staff"]
-        Serve_dict['ServiceType'] = 'ServiceType'
+        Serve_dict['ServiceType'] = request.form["Serve_Type"]
         #######得到了相关负责人的信息
         form_to_model(form, model)
         dct = model_to_dict(model)
@@ -384,6 +384,12 @@ def common_edit_client(DynamicModel, form, view):
             flash('保存成功')
         if Serve.select().where(Serve.clientId == request.form["id"]).count() == 0:
             try:
+                Serve.insert(Serve_dict).execute()
+            except:
+                flash('查无此员工')
+        else:
+            try:
+                Serve.get((Serve.clientId == request.form["id"]) & (Serve.ServiceType == request.form["Serve_Type"])).delete_instance()
                 Serve.insert(Serve_dict).execute()
             except:
                 flash('查无此员工')
