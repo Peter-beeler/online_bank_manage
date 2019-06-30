@@ -332,9 +332,10 @@ def common_list_client(DynamicModel,form,view):
             loan_count    = OwnLoan.select().where( OwnLoan.clientId == del_id).count()
             print("SSSSSSSSSS")
             if account_count + loan_count == 0:
-                DynamicModel.get(DynamicModel.id == del_id).delete_instance()
-                print("OOOOOOOOOOOOO")
                 Serve.delete().where(Serve.clientId == del_id ).execute()
+                Client.get(Client.id == del_id).delete_instance()
+                print("OOOOOOOOOOOOO")
+
                 flash('删除成功')
             else:
                 flash('该用户与账户/贷款存在着绑定关系，无法删除')
@@ -382,15 +383,24 @@ def common_edit_client(DynamicModel, form, view):
             ###莫得，需要在Serve表中也插入相关信息。
             DynamicModel.insert(dct).execute()
             flash('保存成功')
-        if Serve.select().where(Serve.clientId == request.form["id"]).count() == 0:
+        if Serve.select().where((Serve.clientId == request.form["id"]) & (Serve.ServiceType == request.form["Serve_Type"])).count() == 0:
             try:
-                Serve.insert(Serve_dict).execute()
+                print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+                if Serve.select().where((Serve.clientId == request.form["id"]) & (Serve.staffId == request.form["Related_Staff"])).count() == 0:
+                    Serve.insert(Serve_dict).execute()
+                else:
+                    Serve.update(ServiceType = Serve_dict['ServiceType']).where((Serve.clientId == request.form["id"]) 
+                                                        & (Serve.staffId == request.form["Related_Staff"])).execute()
             except:
                 flash('查无此员工')
         else:
             try:
                 Serve.get((Serve.clientId == request.form["id"]) & (Serve.ServiceType == request.form["Serve_Type"])).delete_instance()
-                Serve.insert(Serve_dict).execute()
+                if Serve.select().where((Serve.clientId == request.form["id"]) & (Serve.staffId == request.form["Related_Staff"])).count() == 0:
+                    Serve.insert(Serve_dict).execute()
+                else:
+                    Serve.update(ServiceType = Serve_dict['ServiceType']).where((Serve.clientId == request.form["id"]) 
+                                                        & (Serve.staffId == request.form["Related_Staff"])).execute()
             except:
                 flash('查无此员工')
 
